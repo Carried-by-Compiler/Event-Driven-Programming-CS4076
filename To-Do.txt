@@ -1,0 +1,8 @@
+# To-Do List
+## John
+===
+[ ] Floor + Room class
+[ ] Navigation through rooms + floors
+[ ] Window tabs + basic map
+## Aoife
+===
