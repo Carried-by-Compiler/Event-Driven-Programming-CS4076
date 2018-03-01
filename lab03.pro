@@ -32,7 +32,16 @@ SOURCES += \
     item.cpp \
     Parser.cpp \
     Room.cpp \
-    ZorkUL.cpp
+    ZorkUL.cpp \
+    #Sources/Character.cpp \
+    #Sources/Command.cpp \
+    #Sources/CommandWords.cpp \
+    #Sources/item.cpp \
+    #Sources/main.cpp \
+   # Sources/mainwindow.cpp \
+    #Sources/Parser.cpp \
+    #Sources/Room.cpp \
+    #Sources/ZorkUL.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -42,7 +51,16 @@ HEADERS += \
     item.h \
     Parser.h \
     Room.h \
-    ZorkUL.h
+    ZorkUL.h \
+    #Headers/Character.h \
+    #Headers/Command.h \
+    #Headers/CommandWords.h \
+    #Headers/item.h \
+    #Headers/mainwindow.h \
+    #Headers/Parser.h \
+    #Headers/Room.h \
+    #Headers/ZorkUL.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    #Forms/mainwindow.ui
