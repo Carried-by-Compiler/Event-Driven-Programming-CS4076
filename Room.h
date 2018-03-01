@@ -11,7 +11,7 @@ using std::vector;
 class Room {
 
 private:
-	string description;
+    string description;
 	map<string, Room*> exits;
 	string exitString();
     vector <Item> itemsInRoom;

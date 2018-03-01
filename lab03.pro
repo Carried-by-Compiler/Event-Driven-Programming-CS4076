@@ -51,7 +51,7 @@ HEADERS += \
     item.h \
     Parser.h \
     Room.h \
-    ZorkUL.h \
+    ZorkUL.h
     #Headers/Character.h \
     #Headers/Command.h \
     #Headers/CommandWords.h \
