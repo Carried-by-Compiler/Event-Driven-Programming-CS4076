@@ -16,26 +16,29 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_teleButton_clicked();
+    //void on_teleButton_clicked();
 
-    void on_startButton_clicked();
+    //void on_startButton_clicked();
 
-    void on_mapButton_clicked();
+   // void on_mapButton_clicked();
 
-    void on_NorthButton_clicked();
+    //void on_testButton_clicked();
 
-    void on_westButton_clicked();
+    void on_goButton_clicked();
 
-    void on_EastButton_clicked();
+    void on_upButton_clicked();
 
-    void on_SouthButton_clicked();
-
-    void on_testButton_clicked();
+    void on_downButton_clicked();
 
 private:
-    void check_exit_rooms();
     Ui::MainWindow *ui;
     ZorkUL *zork;
+
+    void check_exit_rooms();
+    void displayCurrentRoomInfo();
+    void displayExitList();
+    void clearExitList();
+    void floorMoveAllowed();
 };
 
 #endif // MAINWINDOW_H

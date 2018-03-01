@@ -42,6 +42,7 @@ SOURCES += \
     #Sources/Parser.cpp \
     #Sources/Room.cpp \
     #Sources/ZorkUL.cpp
+    floor.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -51,7 +52,8 @@ HEADERS += \
     item.h \
     Parser.h \
     Room.h \
-    ZorkUL.h
+    ZorkUL.h \
+    floor.h
     #Headers/Character.h \
     #Headers/Command.h \
     #Headers/CommandWords.h \
@@ -64,3 +66,5 @@ HEADERS += \
 FORMS += \
         mainwindow.ui \
     #Forms/mainwindow.ui
+
+RESOURCES +=
