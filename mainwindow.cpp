@@ -7,6 +7,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     zork = new ZorkUL();
+    QPixmap p(":/images/star.png");
+    ui->mapImage->setPixmap(p);
     displayCurrentRoomInfo();
     displayExitList();
     floorMoveAllowed();

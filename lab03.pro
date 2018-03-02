@@ -67,4 +67,5 @@ FORMS += \
         mainwindow.ui \
     #Forms/mainwindow.ui
 
-RESOURCES +=
+RESOURCES += \
+    myresources.qrc

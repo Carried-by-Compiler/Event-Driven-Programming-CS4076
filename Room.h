@@ -2,6 +2,7 @@
 #define ROOM_H_
 
 #include <QString>
+#include <QPixmap>
 #include <string>
 #include <map>
 #include <vector>
@@ -17,6 +18,7 @@ private:
     vector<Room*> exits;
     QString exitString();
     vector <Item> itemsInRoom;
+    QPixmap roomInMapImage;
     bool upstairs;
     bool downstairs;
 
