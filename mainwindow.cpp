@@ -137,12 +137,14 @@ void MainWindow::on_SouthButton_clicked()
 
 void MainWindow::on_goButton_clicked()
 {
-    QString selectExit = ui->listWidget->currentItem()->text();
-    zork->go(selectExit);
+    if(ui->listWidget->selectedItems().size() != 0) {
+        QString selectExit = ui->listWidget->currentItem()->text();
+        zork->go(selectExit);
 
-    displayCurrentRoomInfo();
-    clearExitList();
-    floorMoveAllowed();
+        displayCurrentRoomInfo();
+        clearExitList();
+        floorMoveAllowed();
+    }
 }
 
 void MainWindow::clearExitList() {

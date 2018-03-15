@@ -1,20 +1,14 @@
 #include "Room.h"
 #include "Command.h"
 
-Room::Room(QString description) {
-    this->description = description;
-    this->upstairs = false;
-    this->downstairs = false;
-}
-
 Room::Room(QString description, bool up, bool down) {
 	this->description = description;
     this->upstairs = up;
     this->downstairs = down;
 }
 
-void Room::addExit(Room *anotherRoom) {
-    exits.push_back(anotherRoom);
+void Room::setExits(vector<Room*> &rooms) {
+    this->exits = rooms;
 }
 
 QString Room::shortDescription() {
