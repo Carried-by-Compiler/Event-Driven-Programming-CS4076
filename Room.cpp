@@ -28,6 +28,7 @@ QString Room::exitString() {
         returnString += "  " + exits.at(i)->shortDescription() + "\n";
 
     }
+
     return returnString;
 
 }
