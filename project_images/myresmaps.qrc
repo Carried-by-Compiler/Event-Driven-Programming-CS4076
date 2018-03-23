@@ -10,5 +10,7 @@
         <file>top_hallway.png</file>
         <file>top_p_room.png</file>
         <file>top_s_room.png</file>
+        <file>basement_boiler.png</file>
+        <file>basement_storage.png</file>
     </qresource>
 </RCC>

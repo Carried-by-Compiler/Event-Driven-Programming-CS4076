@@ -77,7 +77,7 @@ void MainWindow::clearExitList() {
 
 void MainWindow::on_upButton_clicked()
 {
-    zork->moveFloorUp();
+    ui->mapImage->setPixmap(zork->moveFloorUp());
     displayCurrentRoomInfo();
     clearExitList();
     floorMoveAllowed();
@@ -86,7 +86,7 @@ void MainWindow::on_upButton_clicked()
 void MainWindow::on_downButton_clicked()
 {
 
-    zork->moveFloorDown();
+    ui->mapImage->setPixmap(zork->moveFloorDown());
     displayCurrentRoomInfo();
     clearExitList();
     floorMoveAllowed();

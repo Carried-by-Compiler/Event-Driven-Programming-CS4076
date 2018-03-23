@@ -13,8 +13,8 @@ void ZorkUL::createRooms()  {
     Floor *f;
 
     // Basement
-    a = new Room("Storage", "", true, false);
-    b = new Room("Boiler Room", "", false, false);
+    a = new Room("Storage", ":/maps/basement_storage.png", true, false);
+    b = new Room("Boiler Room", ":/maps/basement_boiler.png", false, false);
 
     listOfRooms.push_back(b);
     a->setExits(listOfRooms);
@@ -142,18 +142,20 @@ bool ZorkUL::canGoUpstairs() {
     return currentRoom->canGoUp();
 }
 
-void ZorkUL::moveFloorUp() {
+QPixmap ZorkUL::moveFloorUp() {
     currentFloor = floorList.at(currentFloor->getFloorNum() + 1);
     currentRoom = currentFloor->getRooms().at(0);
+    return currentRoom->getPixmap();
 }
 
 bool ZorkUL::canGoDownstairs() {
     return currentRoom->canGoDown();
 }
 
-void ZorkUL::moveFloorDown() {
+QPixmap ZorkUL::moveFloorDown() {
     currentFloor = floorList.at(currentFloor->getFloorNum() - 1);
     currentRoom = currentFloor->getRooms().at(0);
+    return currentRoom->getPixmap();
 }
 
 QPixmap ZorkUL::go(QString selectedExit) {

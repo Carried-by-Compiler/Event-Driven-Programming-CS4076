@@ -38,8 +38,8 @@ public:
     Floor* getCurrentFloor();
     bool canGoUpstairs();
     bool canGoDownstairs();
-    void moveFloorUp();
-    void moveFloorDown();
+    QPixmap moveFloorUp();
+    QPixmap moveFloorDown();
 	ZorkUL();
 	void play();
     void goTeleport();
