@@ -68,4 +68,4 @@ FORMS += \
     #Forms/mainwindow.ui
 
 RESOURCES += \
-    myresources.qrc
+    project_images/myresmaps.qrc

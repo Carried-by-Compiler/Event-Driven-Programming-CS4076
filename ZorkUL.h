@@ -45,7 +45,7 @@ public:
     void goTeleport();
     string getWelcome();
     string getMap();
-    void go(QString);
+    QPixmap go(QString);
 };
 
 #endif /*ZORKUL_H_*/

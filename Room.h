@@ -23,13 +23,14 @@ private:
 
 
 public:
-    Room(QString = "", bool = false, bool = false);
+    Room(QString = "", QString = "", bool = false, bool = false);
     void setExits(vector<Room*>&);
     vector<Room*> getExits();
     QString shortDescription();
     QString longDescription();
     bool canGoUp();
     bool canGoDown();
+    QPixmap getPixmap();
 };
 
 #endif

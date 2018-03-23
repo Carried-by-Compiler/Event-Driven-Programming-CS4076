@@ -1,7 +1,7 @@
 #include "Room.h"
 #include "Command.h"
 
-Room::Room(QString description, bool up, bool down) {
+Room::Room(QString description, QString path, bool up, bool down) : roomInMapImage(path) {
 	this->description = description;
     this->upstairs = up;
     this->downstairs = down;
@@ -33,6 +33,7 @@ QString Room::exitString() {
 
 }
 
-bool Room::canGoUp()    { return this->upstairs;    }
-bool Room::canGoDown()  { return this->downstairs;  }
+QPixmap Room::getPixmap()   { return this->roomInMapImage; }
+bool Room::canGoUp()        { return this->upstairs;    }
+bool Room::canGoDown()      { return this->downstairs;  }
 

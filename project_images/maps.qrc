@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/maps"/>
+    <qresource prefix="/m">
+        <file>ground_dining.png</file>
+        <file>ground_hallway.png</file>
+        <file>ground_kitchen.png</file>
+        <file>ground_living.png</file>
+        <file>ground_toilet.png</file>
+    </qresource>
+</RCC>

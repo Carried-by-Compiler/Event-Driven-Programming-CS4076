@@ -13,8 +13,8 @@ void ZorkUL::createRooms()  {
     Floor *f;
 
     // Basement
-    a = new Room("Storage", true, false);
-    b = new Room("Boiler Room", false, false);
+    a = new Room("Storage", "", true, false);
+    b = new Room("Boiler Room", "", false, false);
 
     listOfRooms.push_back(b);
     a->setExits(listOfRooms);
@@ -35,11 +35,11 @@ void ZorkUL::createRooms()  {
     listOfRooms.clear();
 
     // First Floor
-    a = new Room("Hallway", true, true);
-    b = new Room("Kitchen");
-    c = new Room("Toilet");
-    d = new Room("Dining Room");
-    e = new Room("Living Room");
+    a = new Room("Hallway", ":/maps/ground_hallway.png", true, true);
+    b = new Room("Kitchen", ":/maps/ground_kitchen.png");
+    c = new Room("Toilet", ":/maps/ground_toilet.png");
+    d = new Room("Dining Room", ":/maps/ground_dining.png");
+    e = new Room("Living Room", ":/maps/ground_living.png");
     listOfRooms.push_back(b);
     listOfRooms.push_back(c);
     listOfRooms.push_back(d);
@@ -62,6 +62,7 @@ void ZorkUL::createRooms()  {
     listOfRooms.clear();
 
     listOfRooms.push_back(a);
+    listOfRooms.push_back(c);
     e->setExits(listOfRooms);
     listOfRooms.clear();
 
@@ -83,11 +84,11 @@ void ZorkUL::createRooms()  {
     currentFloor = floorList.at(1);
 
     // Top Floor
-    a = new Room("Hallway", false, true);
-    b = new Room("Son's Room");
-    c = new Room("Bathroom");
-    d = new Room("Daughter's Room");
-    e = new Room("Parent's Room");
+    a = new Room("Hallway", ":/maps/top_hallway.png", false, true);
+    b = new Room("Son's Room", ":/maps/top_s_room.png");
+    c = new Room("Bathroom", ":/maps/top_bathroom.png");
+    d = new Room("Daughter's Room", ":/maps/top_d_room.png");
+    e = new Room("Parent's Room", ":/maps/top_p_room.png");
 
     listOfRooms.push_back(b);
     listOfRooms.push_back(c);
@@ -155,7 +156,7 @@ void ZorkUL::moveFloorDown() {
     currentRoom = currentFloor->getRooms().at(0);
 }
 
-void ZorkUL::go(QString selectedExit) {
+QPixmap ZorkUL::go(QString selectedExit) {
 
     vector<Room*> rooms = currentFloor->getRooms();
     for (int i = 0; i < rooms.size(); i++) {
@@ -164,4 +165,5 @@ void ZorkUL::go(QString selectedExit) {
             break;
         }
     }
+    return currentRoom->getPixmap();
 }

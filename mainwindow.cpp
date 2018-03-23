@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     zork = new ZorkUL();
-    QPixmap p(":/images/star.png");
+    QPixmap p(":/maps/ground_hallway.png");
     ui->mapImage->setPixmap(p);
     displayCurrentRoomInfo();
     displayExitList();
@@ -57,89 +57,12 @@ void MainWindow::displayExitList() {
         ui->listWidget->addItem(exits.at(i)->shortDescription());
     }
 }
-/*void MainWindow::check_exit_rooms(){
-    if(zork->getCurrentRoom()->nextRoom("north")== NULL){
-        ui->NorthButton->setEnabled(false);
-    }
-    if(!(zork->getCurrentRoom()->nextRoom("north")== NULL)){
-        ui->NorthButton->setEnabled(true);
-    }
-    if(zork->getCurrentRoom()->nextRoom("south")== NULL){
-        ui->SouthButton->setEnabled(false);
-    }
-    if(!(zork->getCurrentRoom()->nextRoom("south")== NULL)){
-        ui->SouthButton->setEnabled(true);
-    }
-
-    if(zork->getCurrentRoom()->nextRoom("west")== NULL){
-        ui->westButton->setEnabled(false);
-    }
-    if(!(zork->getCurrentRoom()->nextRoom("west")== NULL)){
-        ui->westButton->setEnabled(true);
-    }
-    if(zork->getCurrentRoom()->nextRoom("east")== NULL){
-        ui->EastButton->setEnabled(false);
-    }
-    if(!(zork->getCurrentRoom()->nextRoom("east")== NULL)){
-        ui->EastButton->setEnabled(true);
-    }
-} */
-
-/*void MainWindow::on_teleButton_clicked()
-{
-    zork->goTeleport();
-    //check_exit_rooms();
-    ui->textLabel->setText(QString::fromStdString(zork->getCurrentRoom()->longDescription()));
-} */
-
-/*void MainWindow::on_startButton_clicked()
-{
-   ui->textLabel->setText(QString::fromStdString(zork->getCurrentRoom()->longDescription()));
-} */
-
-/*void MainWindow::on_mapButton_clicked()
-{
-    ui->textLabel->setText(QString::fromStdString(zork->getMap()));
-} */
-
-/*void MainWindow::on_NorthButton_clicked()
-{
-    zork->go("north");
-    check_exit_rooms();
-    ui->textLabel->setText(QString::fromStdString(zork->getCurrentRoom()->longDescription()));
-}
-
-void MainWindow::on_westButton_clicked()
-{
-   zork->go("west");
-   check_exit_rooms();
-   ui->textLabel->setText(QString::fromStdString(zork->getCurrentRoom()->longDescription()));
-}
-
-void MainWindow::on_EastButton_clicked()
-{
-    zork->go("east");
-    check_exit_rooms();
-    ui->textLabel->setText(QString::fromStdString(zork->getCurrentRoom()->longDescription()));
-}
-
-void MainWindow::on_SouthButton_clicked()
-{
-    zork->go("south");
-    check_exit_rooms();
-    ui->textLabel->setText(QString::fromStdString(zork->getCurrentRoom()->longDescription()));
-}*/
-
-/*void MainWindow::on_testButton_clicked()
-{
-    ui->textLabel->setText(QString::fromStdString("hello"));
-} */
 
 void MainWindow::on_goButton_clicked()
 {
     if(ui->listWidget->selectedItems().size() != 0) {
         QString selectExit = ui->listWidget->currentItem()->text();
-        zork->go(selectExit);
+        ui->mapImage->setPixmap(zork->go(selectExit));
 
         displayCurrentRoomInfo();
         clearExitList();

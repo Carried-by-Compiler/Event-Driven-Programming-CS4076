@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/maps">
+        <file>ground_dining.png</file>
+        <file>ground_hallway.png</file>
+        <file>ground_kitchen.png</file>
+        <file>ground_living.png</file>
+        <file>ground_toilet.png</file>
+        <file>top_bathroom.png</file>
+        <file>top_d_room.png</file>
+        <file>top_hallway.png</file>
+        <file>top_p_room.png</file>
+        <file>top_s_room.png</file>
+    </qresource>
+</RCC>
