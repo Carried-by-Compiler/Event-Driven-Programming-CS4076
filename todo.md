@@ -12,4 +12,6 @@
 - Improve encapsulation
 ## Aoife
 - [ ] item class (notes and keys as sub objects) 
-- [ ] GUI design and layout
+   -[X] Basic note functionality done
+   -[X] Base for inventory implementation done
+- [X ] GUI design and layout
