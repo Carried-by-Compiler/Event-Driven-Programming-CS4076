@@ -13,8 +13,8 @@ void ZorkUL::createRooms()  {
     Floor *f;
 
     // Basement
-    a = new Room("Storage", ":/maps/basement_storage.png", true, false);
-    b = new Room("Boiler Room", ":/maps/basement_boiler.png", false, false);
+    a = new Room("Basement", ":/maps/basement_storage.png",":/roomView/basement_view.jpg", true, false);
+    b = new Room("Boiler Room", ":/maps/basement_boiler.png",":/roomView/boilerRoom_view.jpg",false, false);
 
     listOfRooms.push_back(b);
     a->setExits(listOfRooms);
@@ -35,11 +35,11 @@ void ZorkUL::createRooms()  {
     listOfRooms.clear();
 
     // First Floor
-    a = new Room("Hallway", ":/maps/ground_hallway.png", true, true);
-    b = new Room("Kitchen", ":/maps/ground_kitchen.png");
-    c = new Room("Toilet", ":/maps/ground_toilet.png");
-    d = new Room("Dining Room", ":/maps/ground_dining.png");
-    e = new Room("Living Room", ":/maps/ground_living.png");
+    a = new Room("Hallway", ":/maps/ground_hallway.png",":/roomView/hallway1_view.jpg", true, true);
+    b = new Room("Kitchen", ":/maps/ground_kitchen.png",":/roomView/Kitchen_view.jpg");
+    c = new Room("Toilet", ":/maps/ground_toilet.png",":/roomView/Bathroom1_view.jpg");
+    d = new Room("Dining Room", ":/maps/ground_dining.png",":/roomView/diningRoom_view.jpg");
+    e = new Room("Living Room", ":/maps/ground_living.png",":/roomView/livingRoom_view.jpg");
     listOfRooms.push_back(b);
     listOfRooms.push_back(c);
     listOfRooms.push_back(d);
@@ -84,11 +84,11 @@ void ZorkUL::createRooms()  {
     currentFloor = floorList.at(1);
 
     // Top Floor
-    a = new Room("Hallway", ":/maps/top_hallway.png", false, true);
-    b = new Room("Son's Room", ":/maps/top_s_room.png");
-    c = new Room("Bathroom", ":/maps/top_bathroom.png");
-    d = new Room("Daughter's Room", ":/maps/top_d_room.png");
-    e = new Room("Parent's Room", ":/maps/top_p_room.png");
+    a = new Room("Hallway", ":/maps/top_hallway.png", ":/roomView/hallway_view.jpg",false, true);
+    b = new Room("Son's Room", ":/maps/top_s_room.png",":/roomView/Bedroom1_view.jpg");
+    c = new Room("Bathroom", ":/maps/top_bathroom.png", ":/roomView/sBathroom2_view.jpg");
+    d = new Room("Daughter's Room", ":/maps/top_d_room.png",":/roomView/Bedroom3_view.jpg");
+    e = new Room("Parent's Room", ":/maps/top_p_room.png",":/roomView/Bedroom2_view.jpg");
 
     listOfRooms.push_back(b);
     listOfRooms.push_back(c);
@@ -127,9 +127,18 @@ void ZorkUL::createRooms()  {
     floorList.push_back(f);
 
     listOfRooms.clear();
+    createNotes();
 
 }
-
+void ZorkUL::createNotes(){
+   notes *note1, *note2, *note3, *note4;
+   note1 = new notes("First", "This", ":/items/Page_image.png");
+   currentNote= note1;
+}
+notes* ZorkUL::getCurrentNote()
+{
+    return this->currentNote;
+}
 Room* ZorkUL::getCurrentRoom(){
     return this->currentRoom;
 }
