@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->mapImage->setPixmap(p);
     displayCurrentRoomInfo();
     displayExitList();
+    inventoryDisplay();
     floorMoveAllowed();
 
 }
@@ -39,16 +40,26 @@ void MainWindow::floorMoveAllowed() {
 
 void MainWindow::displayCurrentRoomInfo() {
     QString currentRoomInfo;
+    QString roomViewPath;
     Room *room;
     Floor *floor;
     floor = zork->getCurrentFloor();
     room = zork->getCurrentRoom();
-
     currentRoomInfo = room->longDescription();
     ui->roomInfoOutput->document()->setPlainText(floor->getDesc() + currentRoomInfo);
-    ui->roomNameLabel->setText(room->shortDescription());
-}
+    roomViewPath = room->getViewPixmap();
+    ui->roomNameLabel->setPixmap(roomViewPath);
 
+}
+void MainWindow::inventoryDisplay(){
+    QString info = ":/items/Inventory_Image.jpg";
+    ui->inventoryDisplay->setPixmap(info);
+    notes *note;
+    note = zork->getCurrentNote();
+    QString path = note->getimagePath();
+    ui->item1->setPixmap(path);
+
+}
 void MainWindow::displayExitList() {
     Room *currRoom = zork->getCurrentRoom();
     vector<Room*> exits = currRoom->getExits();
@@ -90,4 +101,14 @@ void MainWindow::on_downButton_clicked()
     displayCurrentRoomInfo();
     clearExitList();
     floorMoveAllowed();
+}
+
+void MainWindow::on_SearchButton_clicked()
+{
+    ui->roomInfoOutput->document()->setPlainText("Nothing found");
+}
+
+void MainWindow::on_UseItem_clicked()
+{
+      ui->roomInfoOutput->document()->setPlainText("Nothing to use on");
 }
