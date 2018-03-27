@@ -7,6 +7,7 @@
 #include <map>
 #include <vector>
 #include "item.h"
+#include "notes.h"
 using namespace std;
 using std::vector;
 
@@ -14,16 +15,15 @@ class Room {
 
 private:
     QString description;
+    QString viewPath;
     vector<Room*> exits;
     QString exitString();
     vector <Item> itemsInRoom;
     QPixmap roomInMapImage;
     bool upstairs;
     bool downstairs;
-
-
 public:
-    Room(QString = "", QString = "", bool = false, bool = false);
+     Room(QString = "", QString = "", QString = "", bool = false, bool = false);
     void setExits(vector<Room*>&);
     vector<Room*> getExits();
     QString shortDescription();
@@ -31,6 +31,8 @@ public:
     bool canGoUp();
     bool canGoDown();
     QPixmap getPixmap();
+    QString getViewPixmap();
+    QString getNotepath();
 };
 
 #endif
