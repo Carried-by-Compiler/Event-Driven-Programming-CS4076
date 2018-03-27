@@ -68,4 +68,6 @@ FORMS += \
     #Forms/mainwindow.ui
 
 RESOURCES += \
-    project_images/myresmaps.qrc
+    project_images/myresmaps.qrc\
+    project_images/roomviews.qrc\
+    project_images/itemRes.qrc
