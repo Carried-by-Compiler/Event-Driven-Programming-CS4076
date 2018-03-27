@@ -11,7 +11,7 @@
 - Add const data fields 
 - Improve encapsulation
 ## Aoife
-- [ ] item class (notes and keys as sub objects) 
-   -[X] Basic note functionality done
-   -[X] Base for inventory implementation done
-- [X ] GUI design and layout
+ - Basic note functionality done
+- Base for inventory implementation done
+- [X] GUI design and layout
+- [ ] item class (notes and keys as sub objects)
