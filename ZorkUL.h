@@ -6,6 +6,7 @@
 #include "Parser.h"
 #include "Room.h"
 #include "item.h"
+#include "notes.h"
 #include <iostream>
 #include <string>
 #include <list>
@@ -21,7 +22,8 @@ private:
     Floor *currentFloor;
     Room *currentRoom;
     Room *randRoom;
-
+    notes *currentNote;
+    vector<notes*> listOfNotes;
 
 	void createRooms();
 	void printWelcome();
@@ -31,11 +33,13 @@ private:
     void createItems();
     void displayItems();
     Room* rndRoom();
+    void createNotes();
    // void goTeleport();
 
 public:
     Room* getCurrentRoom();
     Floor* getCurrentFloor();
+    notes* getCurrentNote();
     bool canGoUpstairs();
     bool canGoDownstairs();
     QPixmap moveFloorUp();
