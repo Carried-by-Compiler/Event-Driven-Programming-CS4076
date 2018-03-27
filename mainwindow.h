@@ -30,6 +30,10 @@ private slots:
 
     void on_downButton_clicked();
 
+    void on_SearchButton_clicked();
+
+    void on_UseItem_clicked();
+
 private:
     Ui::MainWindow *ui;
     ZorkUL *zork;
@@ -39,6 +43,7 @@ private:
     void displayExitList();
     void clearExitList();
     void floorMoveAllowed();
+    void inventoryDisplay();
 };
 
 #endif // MAINWINDOW_H
