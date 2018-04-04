@@ -1,16 +1,20 @@
 #include "Room.h"
 #include "Command.h"
 
-Room::Room(QString description, QString path, QString path2, bool up, bool down) : roomInMapImage(path){
+Room::Room(QString description, QString path, QString path2, bool up, bool down, bool locked, QString keyID) : roomInMapImage(path){
 	this->description = description;
     this->upstairs = up;
     this->downstairs = down;
     this->viewPath = path2;
+    this->locked = locked;
+    this->keyID = keyID;
 }
 void Room::setExits(vector<Room*> &rooms) {
     this->exits = rooms;
 }
-
+bool Room::checkIfLocked(){
+    return this->locked;
+}
 QString Room::shortDescription() {
 	return description;
 }
