@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/roomView">
+	    <file>hallway_view.jpg</file>
+		<file>basement_view.jpg</file>
+		<file>Bathroom1_view.jpg</file>
+		<file>Bathroom2_view.jpg</file>
+		<file>Bedroom1_view.jpg</file>
+		<file>Bedroom2_view.jpg</file>
+		<file>diningRoom_view.jpg</file>
+		<file>hallway1_view.jpg</file>
+		<file>Kitchen_view.jpg</file>
+		<file>livingRoom_view.jpg</file>
+		<file>boilerRoom_view.jpg</file>
+		<file>Bedroom3_view.jpg</file>
+	</qresource>
+</RCC>

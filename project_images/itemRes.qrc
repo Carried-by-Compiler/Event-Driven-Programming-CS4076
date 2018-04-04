@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/items">
+            <file>Key_image.png</file>
+			<file>Page_image.png</file>
+			<file>Inventory_Image.jpg</file>
+    </qresource>
+</RCC>

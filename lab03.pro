@@ -42,7 +42,8 @@ SOURCES += \
     #Sources/Parser.cpp \
     #Sources/Room.cpp \
     #Sources/ZorkUL.cpp
-    floor.cpp
+    floor.cpp \
+    notes.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -53,7 +54,8 @@ HEADERS += \
     Parser.h \
     Room.h \
     ZorkUL.h \
-    floor.h
+    floor.h \
+    notes.h
     #Headers/Character.h \
     #Headers/Command.h \
     #Headers/CommandWords.h \
@@ -70,4 +72,4 @@ FORMS += \
 RESOURCES += \
     project_images/myresmaps.qrc\
     project_images/roomviews.qrc\
-    project_images/itemRes.qrc
+    project_images/itemRes.qrc\

@@ -1,0 +1,17 @@
+INPUT(
+./release\main.o
+./release\mainwindow.o
+./release\Character.o
+./release\Command.o
+./release\CommandWords.o
+./release\item.o
+./release\Parser.o
+./release\Room.o
+./release\ZorkUL.o
+./release\floor.o
+./release\notes.o
+./release\qrc_myresmaps.o
+./release\qrc_roomviews.o
+./release\qrc_itemRes.o
+./release\moc_mainwindow.o
+);

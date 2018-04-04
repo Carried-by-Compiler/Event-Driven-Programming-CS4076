@@ -1,0 +1,17 @@
+INPUT(
+./debug\main.o
+./debug\mainwindow.o
+./debug\Character.o
+./debug\Command.o
+./debug\CommandWords.o
+./debug\item.o
+./debug\Parser.o
+./debug\Room.o
+./debug\ZorkUL.o
+./debug\floor.o
+./debug\notes.o
+./debug\qrc_myresmaps.o
+./debug\qrc_roomviews.o
+./debug\qrc_itemRes.o
+./debug\moc_mainwindow.o
+);

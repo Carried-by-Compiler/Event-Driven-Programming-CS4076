@@ -86,7 +86,7 @@ void ZorkUL::createRooms()  {
     // Top Floor
     a = new Room("Hallway", ":/maps/top_hallway.png", ":/roomView/hallway_view.jpg",false, true);
     b = new Room("Son's Room", ":/maps/top_s_room.png",":/roomView/Bedroom1_view.jpg");
-    c = new Room("Bathroom", ":/maps/top_bathroom.png", ":/roomView/sBathroom2_view.jpg");
+    c = new Room("Bathroom", ":/maps/top_bathroom.png", ":/roomView/Bathroom2_view.jpg");
     d = new Room("Daughter's Room", ":/maps/top_d_room.png",":/roomView/Bedroom3_view.jpg");
     e = new Room("Parent's Room", ":/maps/top_p_room.png",":/roomView/Bedroom2_view.jpg");
 
