@@ -9,7 +9,7 @@ QT       += core gui
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = lab03
-TEMPLATE = app 
+TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
@@ -30,7 +30,6 @@ SOURCES += \
     Command.cpp \
     CommandWords.cpp \
     item.cpp \
-    Parser.cpp \
     Room.cpp \
     ZorkUL.cpp \
     #Sources/Character.cpp \
@@ -42,7 +41,10 @@ SOURCES += \
     #Sources/Parser.cpp \
     #Sources/Room.cpp \
     #Sources/ZorkUL.cpp
-    floor.cpp
+    floor.cpp \
+    Parser.cpp \
+    notes.cpp \
+    keys.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -50,10 +52,12 @@ HEADERS += \
     Command.h \
     CommandWords.h \
     item.h \
-    Parser.h \
     Room.h \
     ZorkUL.h \
-    floor.h
+    floor.h \
+    Parser.h \
+    notes.h \
+    keys.h
     #Headers/Character.h \
     #Headers/Command.h \
     #Headers/CommandWords.h \
