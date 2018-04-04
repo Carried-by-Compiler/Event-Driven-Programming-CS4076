@@ -1,0 +1,13 @@
+key functionality (Aoife)
+
+Search room
+- Detecting items in room
+- pick them up
+Need inventory working
+- INhritance for keys and notes
+notes - functionality to add to inventory (pick up notes)
+- doesn't add to inventory we need that functionality
+- only displays graphical note
+
+unlocking doors (Aoife)
+ - Game path
