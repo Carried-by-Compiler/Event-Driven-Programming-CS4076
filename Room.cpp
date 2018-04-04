@@ -1,42 +1,43 @@
-#ifndef ROOM_H_
-#define ROOM_H_
+#include "Room.h"
+#include "Command.h"
 
-#include <QString>
-#include <QPixmap>
-#include <string>
-#include <map>
-#include <vector>
-#include "item.h"
-#include "notes.h"
+Room::Room(QString description, QString path, QString path2, bool up, bool down, bool locked, QString keyID) : roomInMapImage(path){
+	this->description = description;
+    this->upstairs = up;
+    this->downstairs = down;
+    this->viewPath = path2;
+    this->locked = locked;
+    this->keyID = keyID;
+}
+void Room::setExits(vector<Room*> &rooms) {
+    this->exits = rooms;
+}
+bool Room::checkIfLocked(){
+    return this->locked;
+}
+QString Room::shortDescription() {
+	return description;
+}
 
-using namespace std;
-using std::vector;
+QString Room::longDescription() {
+    return "room = " + description + exitString();
+}
 
-class Room {
+vector<Room*> Room::getExits() { return this->exits; }
 
-private:
-    QString description;
-    QString viewPath;
-    QString keyID;
-    vector<Room*> exits;
-    QString exitString();
-    vector <Item> itemsInRoom;
-    QPixmap roomInMapImage;
-    bool upstairs;
-    bool downstairs;
-    bool locked;
-public:
-     Room(QString = "", QString = "", QString = "", bool = false, bool = false, bool = false, QString = "");
-    void setExits(vector<Room*>&);
-    vector<Room*> getExits();
-    QString shortDescription();
-    QString longDescription();
-    bool canGoUp();
-    bool canGoDown();
-    bool checkIfLocked();
-    QPixmap getPixmap();
-    QString getViewPixmap();
-    QString getNotepath();
-};
+QString Room::exitString() {
 
-#endif
+    QString returnString = "\nExits:\n";
+    for (int i = 0; i < exits.size(); i++) {
+        returnString += "  " + exits.at(i)->shortDescription() + "\n";
+
+    }
+
+    return returnString;
+
+}
+QString Room::getViewPixmap(){return this->viewPath;}
+QPixmap Room::getPixmap()   { return this->roomInMapImage; }
+bool Room::canGoUp()        { return this->upstairs;    }
+bool Room::canGoDown()      { return this->downstairs;  }
+
