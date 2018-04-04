@@ -8,7 +8,7 @@ ZorkUL::ZorkUL() {
 
 void ZorkUL::createRooms()  {
     //Can only access, and manipulate the variable rooms within this method, will leave behind memory but not access it.
-    Room *a, *b, *c, *d, *e; //*f, *g, *h, *i,*j; // these are pointers to the object rooms.
+    Room *a, *b, *c, *d, *e ,*FrontDoor; //*f, *g, *h, *i,*j; // these are pointers to the object rooms.
     vector<Room*> listOfRooms;
     Floor *f;
 
@@ -36,19 +36,20 @@ void ZorkUL::createRooms()  {
 
     // First Floor
     a = new Room("Hallway", ":/maps/ground_hallway.png",":/roomView/hallway1_view.jpg", true, true);
-    b = new Room("Kitchen", ":/maps/ground_kitchen.png",":/roomView/Kitchen_view.jpg");
-    c = new Room("Toilet", ":/maps/ground_toilet.png",":/roomView/Bathroom1_view.jpg");
-    d = new Room("Dining Room", ":/maps/ground_dining.png",":/roomView/diningRoom_view.jpg");
-    e = new Room("Living Room", ":/maps/ground_living.png",":/roomView/livingRoom_view.jpg");
+    b = new Room("Kitchen", ":/maps/ground_kitchen.png",":/roomView/Kitchen_view.jpg",false,false,false,"null");
+    c = new Room("Toilet", ":/maps/ground_toilet.png",":/roomView/Bathroom1_view.jpg",false,false,false,"null");
+    d = new Room("Dining Room", ":/maps/ground_dining.png",":/roomView/diningRoom_view.jpg",false,false,true,"null");
+    e = new Room("Living Room", ":/maps/ground_living.png",":/roomView/livingRoom_view.jpg",false,false,false,"null");
+    FrontDoor = new Room("Front Door","","", false, false, true, "null");
     listOfRooms.push_back(b);
     listOfRooms.push_back(c);
     listOfRooms.push_back(d);
     listOfRooms.push_back(e);
+    listOfRooms.push_back(FrontDoor);
     a->setExits(listOfRooms);
     listOfRooms.clear();
 
     listOfRooms.push_back(a);
-    listOfRooms.push_back(d);
     b->setExits(listOfRooms);
     listOfRooms.clear();
 
@@ -62,7 +63,6 @@ void ZorkUL::createRooms()  {
     listOfRooms.clear();
 
     listOfRooms.push_back(a);
-    listOfRooms.push_back(c);
     e->setExits(listOfRooms);
     listOfRooms.clear();
 
@@ -102,7 +102,6 @@ void ZorkUL::createRooms()  {
     listOfRooms.clear();
 
     listOfRooms.push_back(a);
-    listOfRooms.push_back(e);
     c->setExits(listOfRooms);
     listOfRooms.clear();
 
@@ -111,7 +110,6 @@ void ZorkUL::createRooms()  {
     listOfRooms.clear();
 
     listOfRooms.push_back(a);
-    listOfRooms.push_back(c);
     e->setExits(listOfRooms);
     listOfRooms.clear();
 
@@ -131,7 +129,7 @@ void ZorkUL::createRooms()  {
 
 }
 void ZorkUL::createNotes(){
-   notes *note1, *note2, *note3, *note4;
+   notes *note1;
    note1 = new notes("First", "This", ":/items/Page_image.png");
    currentNote= note1;
 }
@@ -172,7 +170,13 @@ QPixmap ZorkUL::go(QString selectedExit) {
     vector<Room*> rooms = currentFloor->getRooms();
     for (int i = 0; i < rooms.size(); i++) {
         if ((rooms.at(i)->shortDescription().compare(selectedExit)) == 0) {
+            bool check = rooms.at(i)->checkIfLocked();
+            if(!check){
             currentRoom = rooms.at(i);
+            }
+            else{
+
+            }
             break;
         }
     }
