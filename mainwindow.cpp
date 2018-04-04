@@ -65,7 +65,13 @@ void MainWindow::displayExitList() {
     vector<Room*> exits = currRoom->getExits();
 
     for (int i = 0; i < exits.size(); i++) {
+        bool check = exits.at(i)->checkIfLocked();
+        if(!check){
         ui->listWidget->addItem(exits.at(i)->shortDescription());
+        }
+        else{
+            ui->listWidget->addItem("?????");
+        }
     }
 }
 
@@ -73,11 +79,16 @@ void MainWindow::on_goButton_clicked()
 {
     if(ui->listWidget->selectedItems().size() != 0) {
         QString selectExit = ui->listWidget->currentItem()->text();
+        if(selectExit== "?????"){
+          ui->roomInfoOutput->document()->setPlainText("Locked door, find key");
+        }
+        else{
         ui->mapImage->setPixmap(zork->go(selectExit));
 
         displayCurrentRoomInfo();
         clearExitList();
         floorMoveAllowed();
+        }
     }
 }
 
