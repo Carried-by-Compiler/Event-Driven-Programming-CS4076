@@ -23,8 +23,7 @@ private:
     Room *currentRoom;
     Room *randRoom;
     notes *currentNote;
-    vector<notes*> listOfNotes;
-
+ //   vector<notes*> listOfNotes;
 	void createRooms();
 	void printWelcome();
 	bool processCommand(Command command);
