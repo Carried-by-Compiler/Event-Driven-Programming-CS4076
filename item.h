@@ -2,19 +2,19 @@
 #define ITEM_H_
 
 #include <map>
-#include <string>
+#include <QString>
 #include <iostream>
 using namespace std;
 
 class Item {
 private:
-	string description;
-	string longDescription;
+    QString description;
+    QString longDescription;
 
 public:
-    Item (string description);
-	string getShortDescription();
-    string getLongDescription();
+    Item (QString description);
+    QString getShortDescription();
+    QString getLongDescription();
 };
 
 #endif /*ITEM_H_*/

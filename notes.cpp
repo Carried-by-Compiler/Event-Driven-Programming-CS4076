@@ -1,6 +1,6 @@
 #include "notes.h"
 
-notes::notes(QString noteID, QString contents,QString imagePath)
+notes::notes(QString label, QString noteID, QString contents,QString imagePath) :  Item(label)
 {
     this->noteID = noteID;
     this->contents = contents;
@@ -9,10 +9,6 @@ notes::notes(QString noteID, QString contents,QString imagePath)
 
 QString notes::getContents(){
     return contents;
-}
-
-QString notes::getNoteID(){
-    return noteID;
 }
 
 QString notes::getimagePath(){

@@ -3,10 +3,10 @@
 using namespace std;
 #include "ZorkUL.h"
 ZorkUL::ZorkUL() {
-	createRooms();
+    initializeGame();
 }
 
-void ZorkUL::createRooms()  {
+void ZorkUL::initializeGame()  {
     //Can only access, and manipulate the variable rooms within this method, will leave behind memory but not access it.
     Room *a, *b, *c, *d, *e ,*FrontDoor; //*f, *g, *h, *i,*j; // these are pointers to the object rooms.
     vector<Room*> listOfRooms;
@@ -41,6 +41,7 @@ void ZorkUL::createRooms()  {
     d = new Room("Dining Room", ":/maps/ground_dining.png",":/roomView/diningRoom_view.jpg",false,false,true,"null");
     e = new Room("Living Room", ":/maps/ground_living.png",":/roomView/livingRoom_view.jpg",false,false,false,"null");
     FrontDoor = new Room("Front Door","","", false, false, true, "null");
+    b->addNote(new notes("NOTE", "NKitchen", "Just a simple kitchen note :D",":/items/Page_image.png"));
     listOfRooms.push_back(b);
     listOfRooms.push_back(c);
     listOfRooms.push_back(d);
@@ -125,9 +126,9 @@ void ZorkUL::createRooms()  {
     floorList.push_back(f);
 
     listOfRooms.clear();
-    createNotes();
+    //createNotes();
 
-}
+} /*
 void ZorkUL::createNotes(){
    notes *note1;
    note1 = new notes("First", "This", ":/items/Page_image.png");
@@ -136,7 +137,8 @@ void ZorkUL::createNotes(){
 notes* ZorkUL::getCurrentNote()
 {
     return this->currentNote;
-}
+} */
+
 Room* ZorkUL::getCurrentRoom(){
     return this->currentRoom;
 }

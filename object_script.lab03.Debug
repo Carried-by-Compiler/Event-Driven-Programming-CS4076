@@ -5,11 +5,12 @@ INPUT(
 ./debug\Command.o
 ./debug\CommandWords.o
 ./debug\item.o
-./debug\Parser.o
 ./debug\Room.o
 ./debug\ZorkUL.o
 ./debug\floor.o
+./debug\Parser.o
 ./debug\notes.o
+./debug\keys.o
 ./debug\qrc_myresmaps.o
 ./debug\qrc_roomviews.o
 ./debug\qrc_itemRes.o

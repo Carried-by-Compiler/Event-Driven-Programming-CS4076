@@ -54,10 +54,12 @@ void MainWindow::displayCurrentRoomInfo() {
 void MainWindow::inventoryDisplay(){
     QString info = ":/items/Inventory_Image.jpg";
     ui->inventoryDisplay->setPixmap(info);
+    /*
     notes *note;
     note = zork->getCurrentNote();
     QString path = note->getimagePath();
     ui->item1->setPixmap(path);
+    */
 
 }
 void MainWindow::displayExitList() {
@@ -116,7 +118,21 @@ void MainWindow::on_downButton_clicked()
 
 void MainWindow::on_SearchButton_clicked()
 {
-    ui->roomInfoOutput->document()->setPlainText("Nothing found");
+    vector<Item*> items = zork->getCurrentRoom()->getItems();
+    if(items.size() == 0) {
+        ui->roomInfoOutput->document()->setPlainText("Nothing found");
+    } else {
+        for(int i = 0; i < items.size(); i++) {
+            if(items.at(i)->getShortDescription().compare("NOTE") == 0) {
+                ui->roomInfoOutput->setPlainText("A note has been added to your inventory.\n");
+            } else if (items.at(i)->getShortDescription().compare("KEY") == 0) {
+                ui->roomInfoOutput->setPlainText("A key has been added to your inverntory.\n");
+            }
+
+            // Add item to inventory
+            // Display item on the UI
+        }
+    }
 }
 
 void MainWindow::on_UseItem_clicked()

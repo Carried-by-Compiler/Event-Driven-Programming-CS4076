@@ -1,4 +1,5 @@
 #include "Room.h"
+#include "item.h"
 #include "Command.h"
 
 Room::Room(QString description, QString path, QString path2, bool up, bool down, bool locked, QString keyID) : roomInMapImage(path){
@@ -23,6 +24,7 @@ QString Room::longDescription() {
     return "room = " + description + exitString();
 }
 
+vector<Item*> Room::getItems() { return this->itemsInRoom; }
 vector<Room*> Room::getExits() { return this->exits; }
 
 QString Room::exitString() {
@@ -36,6 +38,11 @@ QString Room::exitString() {
     return returnString;
 
 }
+
+void Room::addNote(notes *note) {
+    this->itemsInRoom.push_back(note);
+}
+
 QString Room::getViewPixmap(){return this->viewPath;}
 QPixmap Room::getPixmap()   { return this->roomInMapImage; }
 bool Room::canGoUp()        { return this->upstairs;    }

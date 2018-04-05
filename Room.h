@@ -20,15 +20,18 @@ private:
     QString keyID;
     vector<Room*> exits;
     QString exitString();
-    vector <Item> itemsInRoom;
+    vector<Item*> itemsInRoom;
     QPixmap roomInMapImage;
     bool upstairs;
     bool downstairs;
     bool locked;
+
 public:
-     Room(QString = "", QString = "", QString = "", bool = false, bool = false, bool = false, QString = "");
+    Room(QString = "", QString = "", QString = "", bool = false, bool = false, bool = false, QString = "");
     void setExits(vector<Room*>&);
+    void addNote(notes*);
     vector<Room*> getExits();
+    vector<Item*> getItems();
     QString shortDescription();
     QString longDescription();
     bool canGoUp();

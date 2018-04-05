@@ -5,11 +5,12 @@ INPUT(
 ./release\Command.o
 ./release\CommandWords.o
 ./release\item.o
-./release\Parser.o
 ./release\Room.o
 ./release\ZorkUL.o
 ./release\floor.o
+./release\Parser.o
 ./release\notes.o
+./release\keys.o
 ./release\qrc_myresmaps.o
 ./release\qrc_roomviews.o
 ./release\qrc_itemRes.o

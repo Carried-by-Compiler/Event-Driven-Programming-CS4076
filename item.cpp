@@ -1,15 +1,15 @@
 #include "item.h"
 
-Item::Item (string inDescription) {
+Item::Item (QString inDescription) {
 	description = inDescription;
 }
-string Item::getShortDescription()
+QString Item::getShortDescription()
 {
 	return description;
 }
 
-string Item::getLongDescription()
+QString Item::getLongDescription()
 {
-	return " item(s), " + description + ".\n";
+    return "This is a " + this->description + ".\n";
 }
 

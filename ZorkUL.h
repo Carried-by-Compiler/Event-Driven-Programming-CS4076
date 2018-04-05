@@ -22,9 +22,9 @@ private:
     Floor *currentFloor;
     Room *currentRoom;
     Room *randRoom;
-    notes *currentNote;
+    //notes *currentNote;
  //   vector<notes*> listOfNotes;
-	void createRooms();
+    void initializeGame();
 	void printWelcome();
 	bool processCommand(Command command);
 	void printHelp();
@@ -32,13 +32,13 @@ private:
     void createItems();
     void displayItems();
     Room* rndRoom();
-    void createNotes();
+    //void createNotes();
    // void goTeleport();
 
 public:
     Room* getCurrentRoom();
     Floor* getCurrentFloor();
-    notes* getCurrentNote();
+    //notes* getCurrentNote();
     bool canGoUpstairs();
     bool canGoDownstairs();
     QPixmap moveFloorUp();
