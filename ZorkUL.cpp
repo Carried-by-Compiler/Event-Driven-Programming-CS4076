@@ -139,6 +139,10 @@ notes* ZorkUL::getCurrentNote()
     return this->currentNote;
 } */
 
+void ZorkUL::addNote(notes *note) {
+    notesList.push_back(note);
+}
+
 Room* ZorkUL::getCurrentRoom(){
     return this->currentRoom;
 }

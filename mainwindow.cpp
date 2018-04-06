@@ -125,6 +125,8 @@ void MainWindow::on_SearchButton_clicked()
         for(int i = 0; i < items.size(); i++) {
             if(items.at(i)->getShortDescription().compare("NOTE") == 0) {
                 ui->roomInfoOutput->setPlainText("A note has been added to your inventory.\n");
+                notes *foundNote = (notes *) items.at(i);
+                zork->addNote(foundNote);
             } else if (items.at(i)->getShortDescription().compare("KEY") == 0) {
                 ui->roomInfoOutput->setPlainText("A key has been added to your inverntory.\n");
             }
@@ -132,6 +134,8 @@ void MainWindow::on_SearchButton_clicked()
             // Add item to inventory
             // Display item on the UI
         }
+
+        // clear room of items
     }
 }
 

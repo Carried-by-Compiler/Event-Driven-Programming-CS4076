@@ -19,6 +19,8 @@ private:
     //vector<Room*> listOfRooms;
     //vector<Room*>::iterator it = listOfRooms.begin();
     vector<Floor*> floorList;
+    vector<notes*> notesList;
+
     Floor *currentFloor;
     Room *currentRoom;
     Room *randRoom;
@@ -49,6 +51,7 @@ public:
     string getWelcome();
     string getMap();
     QPixmap go(QString);
+    void addNote(notes*);
 };
 
 #endif /*ZORKUL_H_*/
