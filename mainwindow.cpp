@@ -148,6 +148,7 @@ void MainWindow::on_SearchButton_clicked()
         }
 
         // clear room of items
+        zork->getCurrentRoom()->clearRoomOfItems();
     }
 }
 

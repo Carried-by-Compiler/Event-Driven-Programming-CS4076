@@ -40,6 +40,7 @@ public:
     QPixmap getPixmap();
     QString getViewPixmap();
     QString getNotepath();
+    void clearRoomOfItems();
 };
 
 #endif

@@ -43,6 +43,7 @@ void Room::addNote(notes *note) {
     this->itemsInRoom.push_back(note);
 }
 
+void Room::clearRoomOfItems() { this->itemsInRoom.clear(); }
 QString Room::getViewPixmap(){return this->viewPath;}
 QPixmap Room::getPixmap()   { return this->roomInMapImage; }
 bool Room::canGoUp()        { return this->upstairs;    }
