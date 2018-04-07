@@ -12,6 +12,7 @@ private:
 
 public:
     notes(QString = "", QString = "", QString = "",QString = "");
+    QString getNoteID();
     QString getContents();
     QString getimagePath();
     //vector<notes> *itemsInRoom;

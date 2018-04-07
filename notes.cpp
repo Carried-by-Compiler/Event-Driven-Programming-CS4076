@@ -7,6 +7,8 @@ notes::notes(QString label, QString noteID, QString contents,QString imagePath) 
     this->imagePath = imagePath;
 }
 
+QString notes::getNoteID() { return this->noteID; }
+
 QString notes::getContents(){
     return contents;
 }

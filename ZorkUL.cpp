@@ -41,7 +41,7 @@ void ZorkUL::initializeGame()  {
     d = new Room("Dining Room", ":/maps/ground_dining.png",":/roomView/diningRoom_view.jpg",false,false,true,"null");
     e = new Room("Living Room", ":/maps/ground_living.png",":/roomView/livingRoom_view.jpg",false,false,false,"null");
     FrontDoor = new Room("Front Door","","", false, false, true, "null");
-    b->addNote(new notes("NOTE", "NKitchen", "Just a simple kitchen note :D",":/items/Page_image.png"));
+    b->addNote(new notes("NOTE", "Kitchen", "Just a simple kitchen note :D",":/items/Page_image.png"));
     listOfRooms.push_back(b);
     listOfRooms.push_back(c);
     listOfRooms.push_back(d);
@@ -90,7 +90,8 @@ void ZorkUL::initializeGame()  {
     c = new Room("Bathroom", ":/maps/top_bathroom.png", ":/roomView/Bathroom2_view.jpg");
     d = new Room("Daughter's Room", ":/maps/top_d_room.png",":/roomView/Bedroom3_view.jpg");
     e = new Room("Parent's Room", ":/maps/top_p_room.png",":/roomView/Bedroom2_view.jpg");
-
+    e->addNote(new notes("NOTE", "Parent's Room", "Parent's Room note (Save me from my misery)",
+                         ":/items/Page_image.png"));
     listOfRooms.push_back(b);
     listOfRooms.push_back(c);
     listOfRooms.push_back(d);
@@ -138,6 +139,16 @@ notes* ZorkUL::getCurrentNote()
 {
     return this->currentNote;
 } */
+notes* ZorkUL::findNote(QString nID) {
+    notes *n = 0;
+    for(int i = 0; i < notesList.size(); i++) {
+        if(notesList.at(i)->getNoteID().compare(nID) == 0) {
+            n = notesList.at(i);
+            break;
+        }
+    }
+    return n;
+}
 
 void ZorkUL::addNote(notes *note) {
     notesList.push_back(note);

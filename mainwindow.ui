@@ -33,7 +33,7 @@
      <enum>QTabWidget::Triangular</enum>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -83,33 +83,20 @@
      <attribute name="title">
       <string>Inventory</string>
      </attribute>
-     <widget class="QPushButton" name="UseItem">
-      <property name="geometry">
-       <rect>
-        <x>160</x>
-        <y>390</y>
-        <width>161</width>
-        <height>28</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Use</string>
-      </property>
-     </widget>
      <widget class="QLabel" name="inventoryDisplay">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
         <width>501</width>
-        <height>391</height>
+        <height>421</height>
        </rect>
       </property>
       <property name="text">
        <string/>
       </property>
      </widget>
-     <widget class="QLabel" name="item1">
+     <widget class="QPushButton" name="item1">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -121,8 +108,11 @@
       <property name="text">
        <string/>
       </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
      </widget>
-     <widget class="QLabel" name="item2">
+     <widget class="QPushButton" name="item2">
       <property name="geometry">
        <rect>
         <x>190</x>
@@ -134,8 +124,11 @@
       <property name="text">
        <string/>
       </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
      </widget>
-     <widget class="QLabel" name="item3">
+     <widget class="QPushButton" name="item3">
       <property name="geometry">
        <rect>
         <x>360</x>
@@ -147,8 +140,11 @@
       <property name="text">
        <string/>
       </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
      </widget>
-     <widget class="QLabel" name="item4">
+     <widget class="QPushButton" name="item4">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -160,8 +156,11 @@
       <property name="text">
        <string/>
       </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
      </widget>
-     <widget class="QLabel" name="item5">
+     <widget class="QPushButton" name="item5">
       <property name="geometry">
        <rect>
         <x>190</x>
@@ -173,8 +172,11 @@
       <property name="text">
        <string/>
       </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
      </widget>
-     <widget class="QLabel" name="item6">
+     <widget class="QPushButton" name="item6">
       <property name="geometry">
        <rect>
         <x>360</x>
@@ -185,6 +187,57 @@
       </property>
       <property name="text">
        <string/>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="item7">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>310</y>
+        <width>111</width>
+        <height>111</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="item8">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>310</y>
+        <width>111</width>
+        <height>111</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="item9">
+      <property name="geometry">
+       <rect>
+        <x>360</x>
+        <y>310</y>
+        <width>111</width>
+        <height>111</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
       </property>
      </widget>
     </widget>
@@ -280,6 +333,19 @@
      <string/>
     </property>
    </widget>
+   <widget class="QPushButton" name="UseItem">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>450</y>
+      <width>161</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Use</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -287,7 +353,7 @@
      <x>0</x>
      <y>0</y>
      <width>798</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

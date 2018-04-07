@@ -5,10 +5,13 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    inventoryItemCounter = 1;
+
     ui->setupUi(this);
     zork = new ZorkUL();
     QPixmap p(":/maps/ground_hallway.png");
     ui->mapImage->setPixmap(p);
+
     displayCurrentRoomInfo();
     displayExitList();
     inventoryDisplay();
@@ -127,8 +130,17 @@ void MainWindow::on_SearchButton_clicked()
                 ui->roomInfoOutput->setPlainText("A note has been added to your inventory.\n");
                 notes *foundNote = (notes *) items.at(i);
                 zork->addNote(foundNote);
+
+                addItemToInventoryGUI(foundNote);
+                /*
+                QPixmap p(foundNote->getimagePath());
+                QIcon buttonIcon(p);
+                ui->item1->setIcon(buttonIcon);
+                ui->item1->setIconSize(p.rect().size());
+                ui->item1->setText(foundNote->getNoteID());
+                */
             } else if (items.at(i)->getShortDescription().compare("KEY") == 0) {
-                ui->roomInfoOutput->setPlainText("A key has been added to your inverntory.\n");
+                ui->roomInfoOutput->setPlainText("Please add key implementation!\n");
             }
 
             // Add item to inventory
@@ -139,7 +151,232 @@ void MainWindow::on_SearchButton_clicked()
     }
 }
 
+void MainWindow::addItemToInventoryGUI(Item *item) {
+    if(item->getShortDescription().compare("NOTE") == 0) {
+        notes* note = (notes *)item;
+        insertToGUI(note);
+
+    } else if(item->getShortDescription().compare("KEY") == 0) {
+        keys* key = (keys *)item;
+        insertToGUI(key);
+
+    }
+}
+
+void MainWindow::insertToGUI(notes *n) {
+    QPixmap p(n->getimagePath());
+    QIcon buttonIcon(p);
+
+    switch (inventoryItemCounter) {
+    case 1:
+        ui->item1->setText(n->getNoteID());
+        ui->item1->setIcon(buttonIcon);
+        ui->item1->setIconSize(p.rect().size());
+        inventoryItemCounter++;
+        break;
+    case 2:
+        ui->item2->setText(n->getNoteID());
+        ui->item2->setIcon(buttonIcon);
+        ui->item2->setIconSize(p.rect().size());
+        inventoryItemCounter++;
+        break;
+    case 3:
+        ui->item3->setText(n->getNoteID());
+        ui->item3->setIcon(buttonIcon);
+        ui->item3->setIconSize(p.rect().size());
+        inventoryItemCounter++;
+        break;
+    case 4:
+        ui->item4->setText(n->getNoteID());
+        ui->item4->setIcon(buttonIcon);
+        ui->item4->setIconSize(p.rect().size());
+        inventoryItemCounter++;
+        break;
+    case 5:
+        ui->item5->setText(n->getNoteID());
+        ui->item5->setIcon(buttonIcon);
+        ui->item5->setIconSize(p.rect().size());
+        inventoryItemCounter++;
+        break;
+    case 6:
+        ui->item6->setText(n->getNoteID());
+        ui->item6->setIcon(buttonIcon);
+        ui->item6->setIconSize(p.rect().size());
+        inventoryItemCounter++;
+        break;
+    case 7:
+        ui->item7->setText(n->getNoteID());
+        ui->item7->setIcon(buttonIcon);
+        ui->item7->setIconSize(p.rect().size());
+        inventoryItemCounter++;
+        break;
+    case 8:
+        ui->item8->setText(n->getNoteID());
+        ui->item8->setIcon(buttonIcon);
+        ui->item8->setIconSize(p.rect().size());
+        inventoryItemCounter++;
+        break;
+    case 9:
+        ui->item9->setText(n->getNoteID());
+        ui->item9->setIcon(buttonIcon);
+        ui->item9->setIconSize(p.rect().size());
+        inventoryItemCounter++;
+    }
+}
+
+void MainWindow::insertToGUI(keys *k) {
+    QPixmap p(k->getimagePath());
+    QIcon buttonIcon(p);
+
+    switch (inventoryItemCounter) {
+    case 1:
+        ui->item1->setText(k->getKeyID());
+        ui->item1->setIcon(buttonIcon);
+        ui->item1->setIconSize(p.rect().size());
+        inventoryItemCounter++;
+        break;
+    case 2:
+        ui->item2->setText(k->getKeyID());
+        ui->item2->setIcon(buttonIcon);
+        ui->item2->setIconSize(p.rect().size());
+        inventoryItemCounter++;
+        break;
+    case 3:
+        ui->item3->setText(k->getKeyID());
+        ui->item3->setIcon(buttonIcon);
+        ui->item3->setIconSize(p.rect().size());
+        inventoryItemCounter++;
+        break;
+    case 4:
+        ui->item4->setText(k->getKeyID());
+        ui->item9->setIcon(buttonIcon);
+        ui->item9->setIconSize(p.rect().size());
+        inventoryItemCounter++;
+        break;
+    case 5:
+        ui->item5->setText(k->getKeyID());
+        ui->item5->setIcon(buttonIcon);
+        ui->item5->setIconSize(p.rect().size());
+        inventoryItemCounter++;
+        break;
+    case 6:
+        ui->item6->setText(k->getKeyID());
+        ui->item6->setIcon(buttonIcon);
+        ui->item6->setIconSize(p.rect().size());
+        inventoryItemCounter++;
+        break;
+    case 7:
+        ui->item7->setText(k->getKeyID());
+        ui->item7->setIcon(buttonIcon);
+        ui->item7->setIconSize(p.rect().size());
+        inventoryItemCounter++;
+        break;
+    case 8:
+        ui->item8->setText(k->getKeyID());
+        ui->item8->setIcon(buttonIcon);
+        ui->item8->setIconSize(p.rect().size());
+        inventoryItemCounter++;
+        break;
+    case 9:
+        ui->item9->setText(k->getKeyID());
+        ui->item9->setIcon(buttonIcon);
+        ui->item9->setIconSize(p.rect().size());
+        inventoryItemCounter++;
+    }
+}
+
 void MainWindow::on_UseItem_clicked()
 {
       ui->roomInfoOutput->document()->setPlainText("Nothing to use on");
+}
+
+void MainWindow::on_item1_clicked()
+{
+    if(ui->item1->text() != NULL) {
+        notes *note = zork->findNote(ui->item1->text());
+        ui->roomInfoOutput->setPlainText(note->getContents());
+    } else {
+        ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
+    }
+
+}
+
+void MainWindow::on_item2_clicked()
+{
+    if(ui->item2->text() != NULL) {
+        notes *note = zork->findNote(ui->item2->text());
+        ui->roomInfoOutput->setPlainText(note->getContents());
+    } else {
+        ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
+    }
+}
+
+void MainWindow::on_item3_clicked()
+{
+    if(ui->item3->text() != NULL) {
+        notes *note = zork->findNote(ui->item3->text());
+        ui->roomInfoOutput->setPlainText(note->getContents());
+    } else {
+        ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
+    }
+}
+
+void MainWindow::on_item4_clicked()
+{
+    if(ui->item4->text() != NULL) {
+        notes *note = zork->findNote(ui->item4->text());
+        ui->roomInfoOutput->setPlainText(note->getContents());
+    } else {
+        ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
+    }
+}
+
+void MainWindow::on_item5_clicked()
+{
+    if(ui->item5->text() != NULL) {
+        notes *note = zork->findNote(ui->item5->text());
+        ui->roomInfoOutput->setPlainText(note->getContents());
+    } else {
+        ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
+    }
+}
+
+void MainWindow::on_item6_clicked()
+{
+    if(ui->item6->text() != NULL) {
+        notes *note = zork->findNote(ui->item6->text());
+        ui->roomInfoOutput->setPlainText(note->getContents());
+    } else {
+        ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
+    }
+}
+
+void MainWindow::on_item7_clicked()
+{
+    if(ui->item7->text() != NULL) {
+        notes *note = zork->findNote(ui->item7->text());
+        ui->roomInfoOutput->setPlainText(note->getContents());
+    } else {
+        ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
+    }
+}
+
+void MainWindow::on_item8_clicked()
+{
+    if(ui->item8->text() != NULL) {
+        notes *note = zork->findNote(ui->item8->text());
+        ui->roomInfoOutput->setPlainText(note->getContents());
+    } else {
+        ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
+    }
+}
+
+void MainWindow::on_item9_clicked()
+{
+    if(ui->item9->text() != NULL) {
+        notes *note = zork->findNote(ui->item9->text());
+        ui->roomInfoOutput->setPlainText(note->getContents());
+    } else {
+        ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
+    }
 }

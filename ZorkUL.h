@@ -7,6 +7,7 @@
 #include "Room.h"
 #include "item.h"
 #include "notes.h"
+#include "keys.h"
 #include <iostream>
 #include <string>
 #include <list>
@@ -51,6 +52,7 @@ public:
     string getWelcome();
     string getMap();
     QPixmap go(QString);
+    notes* findNote(QString);
     void addNote(notes*);
 };
 
