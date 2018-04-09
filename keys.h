@@ -1,15 +1,17 @@
-#include "keys.h"
-
-keys::keys(QString label, QString keyID, QString imagePath) : Item(label)
+#ifndef KEYS_H
+#define KEYS_H
+#include <QString>
+#include "item.h"
+class keys : public Item
 {
-     this->keyID = keyID;
-     this->imagePath=imagePath;
-}
+private:
+     QString keyID;
+     QString imagePath;
 
-QString keys::getKeyID(){
-    return this->keyID;
-}
+public:
+    keys(QString label, QString keyID = "",QString imagePath="");
+    QString getKeyID();
+    QString getimagePath();
+};
 
-QString keys::getimagePath(){
-    return this->imagePath;
-}
+#endif //keys_h
