@@ -21,7 +21,7 @@ private:
     //vector<Room*>::iterator it = listOfRooms.begin();
     vector<Floor*> floorList;
     vector<notes*> notesList;
-
+    vector<keys*> keyList;
     Floor *currentFloor;
     Room *currentRoom;
     Room *randRoom;
@@ -51,6 +51,7 @@ public:
     void goTeleport();
     string getWelcome();
     string getMap();
+    void addKeys(keys*);
     QPixmap go(QString);
     notes* findNote(QString);
     void addNote(notes*);
