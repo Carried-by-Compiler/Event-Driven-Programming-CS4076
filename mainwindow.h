@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "ZorkUL.h"
+#include "item.h"
 namespace Ui {
 class MainWindow;
 }
@@ -56,13 +57,14 @@ private:
     Ui::MainWindow *ui;
     ZorkUL *zork;
     int inventoryItemCounter;
+    vector<Item*> inventoryItems;
 
     void check_exit_rooms();
     void displayCurrentRoomInfo();
     void displayExitList();
     void clearExitList();
     void floorMoveAllowed();
-
+    void on_unlocked_Door(QString, int);
 
     void inventoryDisplay();
     void displayItemContents();
