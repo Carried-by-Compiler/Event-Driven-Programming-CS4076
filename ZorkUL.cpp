@@ -14,9 +14,8 @@ void ZorkUL::initializeGame()  {
 
     // Basement
     a = new Room("Basement", ":/maps/basement_storage.png",":/roomView/basement_view.jpg", true, false);
-    b = new Room("Boiler Room", ":/maps/basement_boiler.png",":/roomView/boilerRoom_view.jpg",false, false);
-    b->addNote(new notes("NOTE", "Boiler", "I'm going to fail this project. :'(", ":/items/Page_image.png"));
-
+    b = new Room("Boiler Room", ":/maps/basement_boiler.png",":/roomView/boilerRoom_view.jpg",false, false, true, "BoilerKey");
+    b-> addKeys(new keys("KEY", "FrontKey",":/items/Key_image.png"));
     listOfRooms.push_back(b);
     a->setExits(listOfRooms);
     listOfRooms.clear();
@@ -39,10 +38,12 @@ void ZorkUL::initializeGame()  {
     a = new Room("Hallway", ":/maps/ground_hallway.png",":/roomView/hallway1_view.jpg", true, true);
     b = new Room("Kitchen", ":/maps/ground_kitchen.png",":/roomView/Kitchen_view.jpg",false,false,false,"null");
     c = new Room("Toilet", ":/maps/ground_toilet.png",":/roomView/Bathroom1_view.jpg",false,false,false,"null");
-    d = new Room("Dining Room", ":/maps/ground_dining.png",":/roomView/diningRoom_view.jpg",false,false,true,"null");
+    d = new Room("Dining Room", ":/maps/ground_dining.png",":/roomView/diningRoom_view.jpg",false,false,true,"DiningKey");
     e = new Room("Living Room", ":/maps/ground_living.png",":/roomView/livingRoom_view.jpg",false,false,false,"null");
-    FrontDoor = new Room("Front Door","","", false, false, true, "null");
+    FrontDoor = new Room("Front Door","","", false, false, true, "FrontKey");
     b->addNote(new notes("NOTE", "Kitchen", "Just a simple kitchen note :D",":/items/Page_image.png"));
+    c->addKeys(new keys("KEY", "DiningKey",":/items/Key_image.png"));
+    d->addKeys(new keys("KEY", "ParentsKey",":/items/Key_image.png" ));
     listOfRooms.push_back(b);
     listOfRooms.push_back(c);
     listOfRooms.push_back(d);
@@ -60,7 +61,6 @@ void ZorkUL::initializeGame()  {
     listOfRooms.clear();
 
     listOfRooms.push_back(a);
-    listOfRooms.push_back(b);
     d->setExits(listOfRooms);
     listOfRooms.clear();
 
@@ -88,12 +88,13 @@ void ZorkUL::initializeGame()  {
     // Top Floor
     a = new Room("Hallway", ":/maps/top_hallway.png", ":/roomView/hallway_view.jpg",false, true);
     b = new Room("Son's Room", ":/maps/top_s_room.png",":/roomView/Bedroom1_view.jpg");
-    b->addNote(new notes("NOTE", "Son's Room", "Give me a diploma please", ":/items/Page_image.png"));
-    c = new Room("Bathroom", ":/maps/top_bathroom.png", ":/roomView/Bathroom2_view.jpg");
+    c = new Room("Bathroom", ":/maps/top_bathroom.png", ":/roomView/Bathroom2_view.jpg",false,false,true,"BathKey");
     d = new Room("Daughter's Room", ":/maps/top_d_room.png",":/roomView/Bedroom3_view.jpg");
-    e = new Room("Parent's Room", ":/maps/top_p_room.png",":/roomView/Bedroom2_view.jpg");
+    e = new Room("Parent's Room", ":/maps/top_p_room.png",":/roomView/Bedroom2_view.jpg",false,false, true, "ParentsKey");
     e->addNote(new notes("NOTE", "Parent's Room", "Parent's Room note (Save me from my misery)",
                          ":/items/Page_image.png"));
+    b->addKeys(new keys("KEY", "BathKey", ":/items/Key_image.png"));
+    e->addKeys(new keys("KEY", "BoilerKey", ":/items/Key_image.png"));
     listOfRooms.push_back(b);
     listOfRooms.push_back(c);
     listOfRooms.push_back(d);
@@ -155,7 +156,9 @@ notes* ZorkUL::findNote(QString nID) {
 void ZorkUL::addNote(notes *note) {
     notesList.push_back(note);
 }
-
+void ZorkUL::addKeys(keys *key) {
+    keyList.push_back(key);
+}
 Room* ZorkUL::getCurrentRoom(){
     return this->currentRoom;
 }

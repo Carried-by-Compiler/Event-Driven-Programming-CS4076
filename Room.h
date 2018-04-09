@@ -8,6 +8,7 @@
 #include <vector>
 #include "item.h"
 #include "notes.h"
+#include "keys.h"
 
 using namespace std;
 using std::vector;
@@ -30,6 +31,7 @@ public:
     Room(QString = "", QString = "", QString = "", bool = false, bool = false, bool = false, QString = "");
     void setExits(vector<Room*>&);
     void addNote(notes*);
+    void addKeys(keys*);
     vector<Room*> getExits();
     vector<Item*> getItems();
     QString shortDescription();
@@ -41,6 +43,8 @@ public:
     QString getViewPixmap();
     QString getNotepath();
     void clearRoomOfItems();
+    bool checkUnlockDoor(keys*);
+    void setLocked(bool);
 };
 
 #endif

@@ -96,6 +96,13 @@ void MainWindow::on_goButton_clicked()
         }
     }
 }
+void MainWindow::on_unlocked_Door(QString curRoom, int itemNumber)
+{
+    ui->mapImage->setPixmap(zork->go(curRoom));
+    clearExitList();
+    floorMoveAllowed();
+    //inventoryItems.erase(inventoryItems.begin() + itemNumber);
+}
 
 void MainWindow::clearExitList() {
     ui->listWidget->clear();
@@ -121,13 +128,15 @@ void MainWindow::on_downButton_clicked()
 
 void MainWindow::on_SearchButton_clicked()
 {
+    QString output = "";
     vector<Item*> items = zork->getCurrentRoom()->getItems();
     if(items.size() == 0) {
         ui->roomInfoOutput->document()->setPlainText("Nothing found");
     } else {
         for(int i = 0; i < items.size(); i++) {
             if(items.at(i)->getShortDescription().compare("NOTE") == 0) {
-                ui->roomInfoOutput->setPlainText("A note has been added to your inventory.\n");
+                //ui->roomInfoOutput->setPlainText("A note has been added to your inventory.\n");
+                output += "A note has been added to your inventory.\n";
                 notes *foundNote = (notes *) items.at(i);
                 zork->addNote(foundNote);
 
@@ -139,25 +148,32 @@ void MainWindow::on_SearchButton_clicked()
                 ui->item1->setIconSize(p.rect().size());
                 ui->item1->setText(foundNote->getNoteID());
                 */
-            } else if (items.at(i)->getShortDescription().compare("KEY") == 0) {
-                ui->roomInfoOutput->setPlainText("Please add key implementation!\n");
+            } else if (items.at(i)->getShortDescription().compare("KEY") == 0) {               
+                output += "A key added to Inventory\n";
+                keys *foundKey = (keys *) items.at(i);
+                zork->addKeys(foundKey);
+                 addItemToInventoryGUI(foundKey);
             }
+            ui->roomInfoOutput->setPlainText(output);
+            // Add item to inventory
+            // Display item on the UI
         }
 
         // clear room of items
-        zork->getCurrentRoom()->clearRoomOfItems();
+           zork->getCurrentRoom()->clearRoomOfItems();
     }
 }
 
 void MainWindow::addItemToInventoryGUI(Item *item) {
     if(item->getShortDescription().compare("NOTE") == 0) {
+        inventoryItems.push_back(item);
         notes* note = (notes *)item;
         insertToGUI(note);
 
     } else if(item->getShortDescription().compare("KEY") == 0) {
+        inventoryItems.push_back(item);
         keys* key = (keys *)item;
         insertToGUI(key);
-
     }
 }
 
@@ -228,55 +244,46 @@ void MainWindow::insertToGUI(keys *k) {
 
     switch (inventoryItemCounter) {
     case 1:
-        ui->item1->setText(k->getKeyID());
         ui->item1->setIcon(buttonIcon);
         ui->item1->setIconSize(p.rect().size());
         inventoryItemCounter++;
         break;
     case 2:
-        ui->item2->setText(k->getKeyID());
         ui->item2->setIcon(buttonIcon);
         ui->item2->setIconSize(p.rect().size());
         inventoryItemCounter++;
         break;
     case 3:
-        ui->item3->setText(k->getKeyID());
         ui->item3->setIcon(buttonIcon);
         ui->item3->setIconSize(p.rect().size());
         inventoryItemCounter++;
         break;
     case 4:
-        ui->item4->setText(k->getKeyID());
         ui->item9->setIcon(buttonIcon);
         ui->item9->setIconSize(p.rect().size());
         inventoryItemCounter++;
         break;
     case 5:
-        ui->item5->setText(k->getKeyID());
         ui->item5->setIcon(buttonIcon);
         ui->item5->setIconSize(p.rect().size());
         inventoryItemCounter++;
         break;
     case 6:
-        ui->item6->setText(k->getKeyID());
         ui->item6->setIcon(buttonIcon);
         ui->item6->setIconSize(p.rect().size());
         inventoryItemCounter++;
         break;
     case 7:
-        ui->item7->setText(k->getKeyID());
         ui->item7->setIcon(buttonIcon);
         ui->item7->setIconSize(p.rect().size());
         inventoryItemCounter++;
         break;
     case 8:
-        ui->item8->setText(k->getKeyID());
         ui->item8->setIcon(buttonIcon);
         ui->item8->setIconSize(p.rect().size());
         inventoryItemCounter++;
         break;
     case 9:
-        ui->item9->setText(k->getKeyID());
         ui->item9->setIcon(buttonIcon);
         ui->item9->setIconSize(p.rect().size());
         inventoryItemCounter++;
@@ -290,91 +297,422 @@ void MainWindow::on_UseItem_clicked()
 
 void MainWindow::on_item1_clicked()
 {
-    if(ui->item1->text() != NULL) {
+    if(inventoryItems.size()>0)
+    {
+     Item *check  = inventoryItems.at(0);
+     if(check->getShortDescription().compare("NOTE") == 0) {
+        notes *note = (notes *) inventoryItems.at(0);//zork->findNote(ui->item2->text());
+        ui->roomInfoOutput->setPlainText(note->getContents());
+
+      }
+     else if(check->getShortDescription().compare("KEY") == 0) {
+         keys *key = (keys *) inventoryItems.at(0);
+         Room *cur = zork->getCurrentRoom();
+         vector<Room*> curExits = cur->getExits();
+         bool unlocked = false;
+         for(int i = 0; i < curExits.size(); i++)
+         {
+            unlocked = curExits.at(i)->checkUnlockDoor(key);
+            if(unlocked)
+            {
+                ui->roomInfoOutput->setPlainText("Key used on door");
+                QString curRoom = cur->shortDescription();
+                on_unlocked_Door(curRoom,0);
+                break;
+            }
+         }
+         if(!unlocked)
+         {
+           ui->roomInfoOutput->setPlainText("Key does not match any door");
+         }
+
+     }
+     else {
+             ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
+     }
+    }
+    else {
+            ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
+    }
+ /*   if(ui->item1->text() != NULL) {
         notes *note = zork->findNote(ui->item1->text());
         ui->roomInfoOutput->setPlainText(note->getContents());
     } else {
         ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
-    }
-
+    }*/
 }
 
 void MainWindow::on_item2_clicked()
 {
-    if(ui->item2->text() != NULL) {
-        notes *note = zork->findNote(ui->item2->text());
+
+    if(inventoryItems.size()>1)
+    {
+     Item *check  = inventoryItems.at(1);
+     if(check->getShortDescription().compare("NOTE") == 0) {
+        notes *note = (notes *) inventoryItems.at(1);//zork->findNote(ui->item2->text());
         ui->roomInfoOutput->setPlainText(note->getContents());
-    } else {
-        ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
+
+      }
+     else if(check->getShortDescription().compare("KEY") == 0) {
+         keys *key = (keys *) inventoryItems.at(1);
+         Room *cur = zork->getCurrentRoom();
+         vector<Room*> curExits = cur->getExits();
+         bool unlocked = false;
+         for(int i = 0; i < curExits.size(); i++)
+         {
+            unlocked = curExits.at(i)->checkUnlockDoor(key);
+            if(unlocked)
+            {
+                ui->roomInfoOutput->setPlainText("Key used on door");
+                QString curRoom = cur->shortDescription();
+                on_unlocked_Door(curRoom,1);
+                break;
+            }
+         }
+         if(!unlocked)
+         {
+           ui->roomInfoOutput->setPlainText("Key does not match any door");
+         }
+
+     }
+     else {
+             ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
+     }
     }
+    else {
+            ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
+    }
+
+   /* if(ui->item2->text() != NULL) {
+
+    } */
 }
 
 void MainWindow::on_item3_clicked()
 {
-    if(ui->item3->text() != NULL) {
+    if(inventoryItems.size()>2)
+    {
+     Item *check  = inventoryItems.at(2);
+     if(check->getShortDescription().compare("NOTE") == 0) {
+        notes *note = (notes *) inventoryItems.at(2); //zork->findNote(ui->item2->text());
+        ui->roomInfoOutput->setPlainText(note->getContents());
+
+      }
+     else if(check->getShortDescription().compare("KEY") == 0) {
+         keys *key = (keys *) inventoryItems.at(2);
+         Room *cur = zork->getCurrentRoom();
+         vector<Room*> curExits = cur->getExits();
+         bool unlocked = false;
+         for(int i = 0; i < curExits.size(); i++)
+         {
+            unlocked = curExits.at(i)->checkUnlockDoor(key);
+            if(unlocked)
+            {
+                ui->roomInfoOutput->setPlainText("Key used on door");
+                QString curRoom = cur->shortDescription();
+                on_unlocked_Door(curRoom,2);
+                break;
+            }
+         }
+         if(!unlocked)
+         {
+           ui->roomInfoOutput->setPlainText("Key does not match any door");
+         }
+
+     }
+     else {
+             ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
+     }
+    }
+    else {
+            ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
+    }
+ /*   if(ui->item3->text() != NULL) {
         notes *note = zork->findNote(ui->item3->text());
         ui->roomInfoOutput->setPlainText(note->getContents());
     } else {
         ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
-    }
+    }*/
 }
 
 void MainWindow::on_item4_clicked()
 {
-    if(ui->item4->text() != NULL) {
+    if(inventoryItems.size()>3)
+    {
+     Item *check  = inventoryItems.at(3);
+     if(check->getShortDescription().compare("NOTE") == 0) {
+        notes *note =  (notes *) inventoryItems.at(3);// zork->findNote(ui->item2->text());
+        ui->roomInfoOutput->setPlainText(note->getContents());
+
+      }
+     else if(check->getShortDescription().compare("KEY") == 0) {
+         keys *key = (keys *) inventoryItems.at(3);
+         Room *cur = zork->getCurrentRoom();
+         vector<Room*> curExits = cur->getExits();
+         bool unlocked = false;
+         for(int i = 0; i < curExits.size(); i++)
+         {
+            unlocked = curExits.at(i)->checkUnlockDoor(key);
+            if(unlocked)
+            {
+                ui->roomInfoOutput->setPlainText("Key used on door");
+                QString curRoom = cur->shortDescription();
+                on_unlocked_Door(curRoom,3);
+                break;
+            }
+         }
+         if(!unlocked)
+         {
+           ui->roomInfoOutput->setPlainText("Key does not match any door");
+         }
+
+     }
+     else {
+             ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
+     }
+    }
+    else {
+            ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
+    }
+    /* if(ui->item4->text() != NULL) {
         notes *note = zork->findNote(ui->item4->text());
         ui->roomInfoOutput->setPlainText(note->getContents());
     } else {
         ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
-    }
+    }*/
 }
 
 void MainWindow::on_item5_clicked()
 {
-    if(ui->item5->text() != NULL) {
+    if(inventoryItems.size()>4)
+    {
+     Item *check  = inventoryItems.at(4);
+     if(check->getShortDescription().compare("NOTE") == 0) {
+        notes *note =  (notes *) inventoryItems.at(4);//zork->findNote(ui->item2->text());
+        ui->roomInfoOutput->setPlainText(note->getContents());
+
+      }
+     else if(check->getShortDescription().compare("KEY") == 0) {
+         keys *key = (keys *) inventoryItems.at(4);
+         Room *cur = zork->getCurrentRoom();
+         vector<Room*> curExits = cur->getExits();
+         bool unlocked = false;
+         for(int i = 0; i < curExits.size(); i++)
+         {
+            unlocked = curExits.at(i)->checkUnlockDoor(key);
+            if(unlocked)
+            {
+                ui->roomInfoOutput->setPlainText("Key used on door");
+                QString curRoom = cur->shortDescription();
+                on_unlocked_Door(curRoom,4);
+                break;
+            }
+         }
+         if(!unlocked)
+         {
+           ui->roomInfoOutput->setPlainText("Key does not match any door");
+         }
+
+     }
+     else {
+             ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
+     }
+    }
+    else {
+            ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
+    }
+    /*  if(ui->item5->text() != NULL) {
         notes *note = zork->findNote(ui->item5->text());
         ui->roomInfoOutput->setPlainText(note->getContents());
     } else {
         ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
-    }
+    }*/
 }
 
 void MainWindow::on_item6_clicked()
 {
-    if(ui->item6->text() != NULL) {
+    if(inventoryItems.size()>5)
+    {
+     Item *check  = inventoryItems.at(5);
+     if(check->getShortDescription().compare("NOTE") == 0) {
+        notes *note =  (notes *) inventoryItems.at(5);//zork->findNote(ui->item2->text());
+        ui->roomInfoOutput->setPlainText(note->getContents());
+
+      }
+     else if(check->getShortDescription().compare("KEY") == 0) {
+         keys *key = (keys *) inventoryItems.at(5);
+         Room *cur = zork->getCurrentRoom();
+         vector<Room*> curExits = cur->getExits();
+         bool unlocked = false;
+         for(int i = 0; i < curExits.size(); i++)
+         {
+            unlocked = curExits.at(i)->checkUnlockDoor(key);
+            if(unlocked)
+            {
+                ui->roomInfoOutput->setPlainText("Key used on door");
+                QString curRoom = cur->shortDescription();
+                on_unlocked_Door(curRoom,5);
+                break;
+            }
+         }
+         if(!unlocked)
+         {
+           ui->roomInfoOutput->setPlainText("Key does not match any door");
+         }
+
+     }
+     else {
+             ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
+     }
+    }
+    else {
+            ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
+    }
+    /* if(ui->item6->text() != NULL) {
         notes *note = zork->findNote(ui->item6->text());
         ui->roomInfoOutput->setPlainText(note->getContents());
     } else {
         ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
-    }
+    }*/
 }
 
 void MainWindow::on_item7_clicked()
 {
-    if(ui->item7->text() != NULL) {
+    if(inventoryItems.size()>6)
+    {
+     Item *check  = inventoryItems.at(6);
+     if(check->getShortDescription().compare("NOTE") == 0) {
+        notes *note =  (notes *) inventoryItems.at(6);//zork->findNote(ui->item2->text());
+        ui->roomInfoOutput->setPlainText(note->getContents());
+
+      }
+     else if(check->getShortDescription().compare("KEY") == 0) {
+         keys *key = (keys *) inventoryItems.at(6);
+         Room *cur = zork->getCurrentRoom();
+         vector<Room*> curExits = cur->getExits();
+         bool unlocked = false;
+         for(int i = 0; i < curExits.size(); i++)
+         {
+            unlocked = curExits.at(i)->checkUnlockDoor(key);
+            if(unlocked)
+            {
+                ui->roomInfoOutput->setPlainText("Key used on door");
+                QString curRoom = cur->shortDescription();
+                on_unlocked_Door(curRoom,6);
+                break;
+            }
+         }
+         if(!unlocked)
+         {
+           ui->roomInfoOutput->setPlainText("Key does not match any door");
+         }
+
+     }
+     else {
+             ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
+     }
+    }
+    else {
+            ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
+    }
+    /*if(ui->item7->text() != NULL) {
         notes *note = zork->findNote(ui->item7->text());
         ui->roomInfoOutput->setPlainText(note->getContents());
     } else {
         ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
-    }
+    }*/
 }
 
 void MainWindow::on_item8_clicked()
 {
-    if(ui->item8->text() != NULL) {
+    if(inventoryItems.size()>7)
+    {
+     Item *check  = inventoryItems.at(7);
+     if(check->getShortDescription().compare("NOTE") == 0) {
+        notes *note =  (notes *) inventoryItems.at(7);//zork->findNote(ui->item2->text());
+        ui->roomInfoOutput->setPlainText(note->getContents());
+
+      }
+     else if(check->getShortDescription().compare("KEY") == 0) {
+         keys *key = (keys *) inventoryItems.at(7);
+         Room *cur = zork->getCurrentRoom();
+         vector<Room*> curExits = cur->getExits();
+         bool unlocked = false;
+         for(int i = 0; i < curExits.size(); i++)
+         {
+            unlocked = curExits.at(i)->checkUnlockDoor(key);
+            if(unlocked)
+            {
+                ui->roomInfoOutput->setPlainText("Key used on door");
+                QString curRoom = cur->shortDescription();
+                on_unlocked_Door(curRoom,7);
+                break;
+            }
+         }
+         if(!unlocked)
+         {
+           ui->roomInfoOutput->setPlainText("Key does not match any door");
+         }
+
+     }
+     else {
+             ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
+     }
+    }
+    else {
+            ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
+    }
+    /*if(ui->item8->text() != NULL) {
         notes *note = zork->findNote(ui->item8->text());
         ui->roomInfoOutput->setPlainText(note->getContents());
     } else {
         ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
-    }
+    }*/
 }
 
 void MainWindow::on_item9_clicked()
 {
-    if(ui->item9->text() != NULL) {
+    if(inventoryItems.size()>8)
+    {
+     Item *check  = inventoryItems.at(8);
+     if(check->getShortDescription().compare("NOTE") == 0) {
+        notes *note = (notes *) inventoryItems.at(8); //zork->findNote(ui->item2->text());
+        ui->roomInfoOutput->setPlainText(note->getContents());
+
+      }
+     else if(check->getShortDescription().compare("KEY") == 0) {
+         keys *key = (keys *) inventoryItems.at(8);
+         Room *cur = zork->getCurrentRoom();
+         vector<Room*> curExits = cur->getExits();
+         bool unlocked = false;
+         for(int i = 0; i < curExits.size(); i++)
+         {
+            unlocked = curExits.at(i)->checkUnlockDoor(key);
+            if(unlocked)
+            {
+                ui->roomInfoOutput->setPlainText("Key used on door");
+                QString curRoom = cur->shortDescription();
+                on_unlocked_Door(curRoom,8);
+                break;
+            }
+         }
+         if(!unlocked)
+         {
+           ui->roomInfoOutput->setPlainText("Key does not match any door");
+         }
+
+     }
+     else {
+             ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
+     }
+    }
+    else {
+            ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
+    }
+    /*  if(ui->item9->text() != NULL) {
         notes *note = zork->findNote(ui->item9->text());
         ui->roomInfoOutput->setPlainText(note->getContents());
     } else {
         ui->roomInfoOutput->setPlainText("There is nothing to view on this item");
-    }
+    }*/
 }
