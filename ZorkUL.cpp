@@ -15,6 +15,7 @@ void ZorkUL::initializeGame()  {
     // Basement
     a = new Room("Basement", ":/maps/basement_storage.png",":/roomView/basement_view.jpg", true, false);
     b = new Room("Boiler Room", ":/maps/basement_boiler.png",":/roomView/boilerRoom_view.jpg",false, false);
+    b->addNote(new notes("NOTE", "Boiler", "I'm going to fail this project. :'(", ":/items/Page_image.png"));
 
     listOfRooms.push_back(b);
     a->setExits(listOfRooms);
@@ -87,6 +88,7 @@ void ZorkUL::initializeGame()  {
     // Top Floor
     a = new Room("Hallway", ":/maps/top_hallway.png", ":/roomView/hallway_view.jpg",false, true);
     b = new Room("Son's Room", ":/maps/top_s_room.png",":/roomView/Bedroom1_view.jpg");
+    b->addNote(new notes("NOTE", "Son's Room", "Give me a diploma please", ":/items/Page_image.png"));
     c = new Room("Bathroom", ":/maps/top_bathroom.png", ":/roomView/Bathroom2_view.jpg");
     d = new Room("Daughter's Room", ":/maps/top_d_room.png",":/roomView/Bedroom3_view.jpg");
     e = new Room("Parent's Room", ":/maps/top_p_room.png",":/roomView/Bedroom2_view.jpg");

@@ -142,9 +142,6 @@ void MainWindow::on_SearchButton_clicked()
             } else if (items.at(i)->getShortDescription().compare("KEY") == 0) {
                 ui->roomInfoOutput->setPlainText("Please add key implementation!\n");
             }
-
-            // Add item to inventory
-            // Display item on the UI
         }
 
         // clear room of items
