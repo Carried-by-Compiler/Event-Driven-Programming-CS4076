@@ -16,6 +16,9 @@
 using namespace std;
 
 class ZorkUL {
+
+    //friend QString &operator +(const QString &, int);
+
 private:
     //vector<Room*> listOfRooms;
     //vector<Room*>::iterator it = listOfRooms.begin();
@@ -25,6 +28,7 @@ private:
     Floor *currentFloor;
     Room *currentRoom;
     Room *randRoom;
+    QString answer;
     //notes *currentNote;
  //   vector<notes*> listOfNotes;
     void initializeGame();
@@ -34,11 +38,12 @@ private:
 	void goRoom(Command command);
     void createItems();
     void displayItems();
-    Room* rndRoom();
     //void createNotes();
    // void goTeleport();
 
 public:
+    ~ZorkUL();
+    ZorkUL();
     Room* getCurrentRoom();
     Floor* getCurrentFloor();
     //notes* getCurrentNote();
@@ -46,7 +51,6 @@ public:
     bool canGoDownstairs();
     QPixmap moveFloorUp();
     QPixmap moveFloorDown();
-	ZorkUL();
 	void play();
     void goTeleport();
     string getWelcome();
@@ -55,6 +59,7 @@ public:
     QPixmap go(QString);
     notes* findNote(QString);
     void addNote(notes*);
+    bool checkAnswer(QString);
 };
 
 #endif /*ZORKUL_H_*/

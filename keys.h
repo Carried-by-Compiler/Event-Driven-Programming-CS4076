@@ -10,6 +10,7 @@ private:
 
 public:
     keys(QString label, QString keyID = "",QString imagePath="");
+    ~keys();
     QString getKeyID();
     QString getimagePath();
 };

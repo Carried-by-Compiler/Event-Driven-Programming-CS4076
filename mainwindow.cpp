@@ -6,21 +6,29 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     inventoryItemCounter = 1;
+    QString message = "<html><h3>Game Objective</h3>The front door of the building";
+    message += " is locked. You must find the key as well as solve the riddle";
+    message += " in order to escape. Notes around the house may help you, so search for them.</html>";
 
     ui->setupUi(this);
     zork = new ZorkUL();
     QPixmap p(":/maps/ground_hallway.png");
     ui->mapImage->setPixmap(p);
 
+    notes *n = new notes("NOTE", "Hallway", message, ":/items/Page_image.png");
+    addItemToInventoryGUI(n);
+    ui->roomInfoOutput->document()->setHtml(n->getContents());
+
     displayCurrentRoomInfo();
     displayExitList();
     inventoryDisplay();
     floorMoveAllowed();
-
+    ui->roomInfoOutput->document()->setHtml(n->getContents());
 }
 
 MainWindow::~MainWindow()
 {
+    delete zork;
     delete ui;
 }
 
@@ -86,8 +94,9 @@ void MainWindow::on_goButton_clicked()
         QString selectExit = ui->listWidget->currentItem()->text();
         if(selectExit== "?????"){
           ui->roomInfoOutput->document()->setPlainText("Locked door, find key");
-        }
-        else{
+        } else if(selectExit == "Front Door") {
+            displayLastRiddle();
+        } else{
         ui->mapImage->setPixmap(zork->go(selectExit));
 
         displayCurrentRoomInfo();
@@ -138,6 +147,7 @@ void MainWindow::on_SearchButton_clicked()
                 //ui->roomInfoOutput->setPlainText("A note has been added to your inventory.\n");
                 output += "A note has been added to your inventory.\n";
                 notes *foundNote = (notes *) items.at(i);
+
                 zork->addNote(foundNote);
 
                 addItemToInventoryGUI(foundNote);
@@ -146,7 +156,7 @@ void MainWindow::on_SearchButton_clicked()
                 QIcon buttonIcon(p);
                 ui->item1->setIcon(buttonIcon);
                 ui->item1->setIconSize(p.rect().size());
-                ui->item1->setText(foundNote->getNoteID());
+                ui->item1->setPlainText(foundNote->getNoteID());
                 */
             } else if (items.at(i)->getShortDescription().compare("KEY") == 0) {               
                 output += "A key added to Inventory\n";
@@ -154,7 +164,7 @@ void MainWindow::on_SearchButton_clicked()
                 zork->addKeys(foundKey);
                  addItemToInventoryGUI(foundKey);
             }
-            ui->roomInfoOutput->setPlainText(output);
+            ui->roomInfoOutput->document()->setPlainText(output);
             // Add item to inventory
             // Display item on the UI
         }
@@ -259,8 +269,8 @@ void MainWindow::insertToGUI(keys *k) {
         inventoryItemCounter++;
         break;
     case 4:
-        ui->item9->setIcon(buttonIcon);
-        ui->item9->setIconSize(p.rect().size());
+        ui->item4->setIcon(buttonIcon);
+        ui->item4->setIconSize(p.rect().size());
         inventoryItemCounter++;
         break;
     case 5:
@@ -290,9 +300,28 @@ void MainWindow::insertToGUI(keys *k) {
     }
 }
 
+void MainWindow::displayLastRiddle() {
+    lastRiddle = new LastRiddle(NULL, &answer);
+    lastRiddle->setModal(true);
+    lastRiddle->exec();
+
+    if(zork->checkAnswer(answer)) {
+        gameEnd = new GameEnd();
+        gameEnd->setModal(true);
+        gameEnd->exec();
+
+        this->close();
+    }
+
+}
+
 void MainWindow::on_UseItem_clicked()
 {
-      ui->roomInfoOutput->document()->setPlainText("Nothing to use on");
+    gameEnd = new GameEnd();
+    gameEnd->setModal(true);
+    gameEnd->exec();
+
+    this->close();
 }
 
 void MainWindow::on_item1_clicked()
@@ -302,7 +331,7 @@ void MainWindow::on_item1_clicked()
      Item *check  = inventoryItems.at(0);
      if(check->getShortDescription().compare("NOTE") == 0) {
         notes *note = (notes *) inventoryItems.at(0);//zork->findNote(ui->item2->text());
-        ui->roomInfoOutput->setPlainText(note->getContents());
+        ui->roomInfoOutput->document()->setHtml(note->getContents());
 
       }
      else if(check->getShortDescription().compare("KEY") == 0) {
@@ -315,7 +344,7 @@ void MainWindow::on_item1_clicked()
             unlocked = curExits.at(i)->checkUnlockDoor(key);
             if(unlocked)
             {
-                ui->roomInfoOutput->setPlainText("Key used on door");
+                ui->roomInfoOutput->setPlainText("Key used on " + curExits.at(i)->shortDescription() + " door.");
                 QString curRoom = cur->shortDescription();
                 on_unlocked_Door(curRoom,0);
                 break;
@@ -350,7 +379,7 @@ void MainWindow::on_item2_clicked()
      Item *check  = inventoryItems.at(1);
      if(check->getShortDescription().compare("NOTE") == 0) {
         notes *note = (notes *) inventoryItems.at(1);//zork->findNote(ui->item2->text());
-        ui->roomInfoOutput->setPlainText(note->getContents());
+        ui->roomInfoOutput->document()->setHtml(note->getContents());
 
       }
      else if(check->getShortDescription().compare("KEY") == 0) {
@@ -363,7 +392,7 @@ void MainWindow::on_item2_clicked()
             unlocked = curExits.at(i)->checkUnlockDoor(key);
             if(unlocked)
             {
-                ui->roomInfoOutput->setPlainText("Key used on door");
+                ui->roomInfoOutput->setPlainText("Key used on " + curExits.at(i)->shortDescription() + " door.");
                 QString curRoom = cur->shortDescription();
                 on_unlocked_Door(curRoom,1);
                 break;
@@ -395,7 +424,7 @@ void MainWindow::on_item3_clicked()
      Item *check  = inventoryItems.at(2);
      if(check->getShortDescription().compare("NOTE") == 0) {
         notes *note = (notes *) inventoryItems.at(2); //zork->findNote(ui->item2->text());
-        ui->roomInfoOutput->setPlainText(note->getContents());
+        ui->roomInfoOutput->document()->setHtml(note->getContents());
 
       }
      else if(check->getShortDescription().compare("KEY") == 0) {
@@ -408,7 +437,7 @@ void MainWindow::on_item3_clicked()
             unlocked = curExits.at(i)->checkUnlockDoor(key);
             if(unlocked)
             {
-                ui->roomInfoOutput->setPlainText("Key used on door");
+                ui->roomInfoOutput->setPlainText("Key used on " + curExits.at(i)->shortDescription() + " door.");
                 QString curRoom = cur->shortDescription();
                 on_unlocked_Door(curRoom,2);
                 break;
@@ -442,7 +471,7 @@ void MainWindow::on_item4_clicked()
      Item *check  = inventoryItems.at(3);
      if(check->getShortDescription().compare("NOTE") == 0) {
         notes *note =  (notes *) inventoryItems.at(3);// zork->findNote(ui->item2->text());
-        ui->roomInfoOutput->setPlainText(note->getContents());
+        ui->roomInfoOutput->document()->setHtml(note->getContents());
 
       }
      else if(check->getShortDescription().compare("KEY") == 0) {
@@ -455,7 +484,7 @@ void MainWindow::on_item4_clicked()
             unlocked = curExits.at(i)->checkUnlockDoor(key);
             if(unlocked)
             {
-                ui->roomInfoOutput->setPlainText("Key used on door");
+                ui->roomInfoOutput->setPlainText("Key used on " + curExits.at(i)->shortDescription() + " door.");
                 QString curRoom = cur->shortDescription();
                 on_unlocked_Door(curRoom,3);
                 break;
@@ -489,7 +518,7 @@ void MainWindow::on_item5_clicked()
      Item *check  = inventoryItems.at(4);
      if(check->getShortDescription().compare("NOTE") == 0) {
         notes *note =  (notes *) inventoryItems.at(4);//zork->findNote(ui->item2->text());
-        ui->roomInfoOutput->setPlainText(note->getContents());
+        ui->roomInfoOutput->document()->setHtml(note->getContents());
 
       }
      else if(check->getShortDescription().compare("KEY") == 0) {
@@ -502,7 +531,7 @@ void MainWindow::on_item5_clicked()
             unlocked = curExits.at(i)->checkUnlockDoor(key);
             if(unlocked)
             {
-                ui->roomInfoOutput->setPlainText("Key used on door");
+                ui->roomInfoOutput->setPlainText("Key used on " + curExits.at(i)->shortDescription() + " door.");
                 QString curRoom = cur->shortDescription();
                 on_unlocked_Door(curRoom,4);
                 break;
@@ -549,7 +578,7 @@ void MainWindow::on_item6_clicked()
             unlocked = curExits.at(i)->checkUnlockDoor(key);
             if(unlocked)
             {
-                ui->roomInfoOutput->setPlainText("Key used on door");
+                ui->roomInfoOutput->setPlainText("Key used on " + curExits.at(i)->shortDescription() + " door.");
                 QString curRoom = cur->shortDescription();
                 on_unlocked_Door(curRoom,5);
                 break;
@@ -596,7 +625,7 @@ void MainWindow::on_item7_clicked()
             unlocked = curExits.at(i)->checkUnlockDoor(key);
             if(unlocked)
             {
-                ui->roomInfoOutput->setPlainText("Key used on door");
+                ui->roomInfoOutput->setPlainText("Key used on " + curExits.at(i)->shortDescription() + " door.");
                 QString curRoom = cur->shortDescription();
                 on_unlocked_Door(curRoom,6);
                 break;
@@ -643,7 +672,7 @@ void MainWindow::on_item8_clicked()
             unlocked = curExits.at(i)->checkUnlockDoor(key);
             if(unlocked)
             {
-                ui->roomInfoOutput->setPlainText("Key used on door");
+                ui->roomInfoOutput->setPlainText("Key used on " + curExits.at(i)->shortDescription() + " door.");
                 QString curRoom = cur->shortDescription();
                 on_unlocked_Door(curRoom,7);
                 break;
@@ -690,7 +719,7 @@ void MainWindow::on_item9_clicked()
             unlocked = curExits.at(i)->checkUnlockDoor(key);
             if(unlocked)
             {
-                ui->roomInfoOutput->setPlainText("Key used on door");
+                ui->roomInfoOutput->setPlainText("Key used on " + curExits.at(i)->shortDescription() + " door.");
                 QString curRoom = cur->shortDescription();
                 on_unlocked_Door(curRoom,8);
                 break;

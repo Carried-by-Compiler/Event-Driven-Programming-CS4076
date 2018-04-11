@@ -1,5 +1,4 @@
 INPUT(
-./debug\main.o
 ./debug\mainwindow.o
 ./debug\Character.o
 ./debug\Command.o
@@ -11,8 +10,13 @@ INPUT(
 ./debug\Parser.o
 ./debug\notes.o
 ./debug\keys.o
+./debug\main.o
+./debug\lastriddle.o
+./debug\gameend.o
 ./debug\qrc_myresmaps.o
 ./debug\qrc_roomviews.o
 ./debug\qrc_itemRes.o
 ./debug\moc_mainwindow.o
+./debug\moc_lastriddle.o
+./debug\moc_gameend.o
 );

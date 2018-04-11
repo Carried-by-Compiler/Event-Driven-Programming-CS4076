@@ -6,8 +6,20 @@ ZorkUL::ZorkUL() {
     initializeGame();
 }
 
+ZorkUL::~ZorkUL() {
+    for(int i = 0; i < keyList.size(); i++)
+        delete keyList.at(i);
+    for(int i = 0; i < notesList.size(); i++)
+        delete notesList.at(i);
+    for(int i = 0; i < floorList.size(); i++)
+        delete floorList.at(i);
+    std::cout << "Deleting ZorkUL" << endl;
+}
+
 void ZorkUL::initializeGame()  {
     //Can only access, and manipulate the variable rooms within this method, will leave behind memory but not access it.
+    this->answer = "SILENCE";
+    QString message = "";
     Room *a, *b, *c, *d, *e ,*FrontDoor; //*f, *g, *h, *i,*j; // these are pointers to the object rooms.
     vector<Room*> listOfRooms;
     Floor *f;
@@ -15,7 +27,7 @@ void ZorkUL::initializeGame()  {
     // Basement
     a = new Room("Basement", ":/maps/basement_storage.png",":/roomView/basement_view.jpg", true, false);
     b = new Room("Boiler Room", ":/maps/basement_boiler.png",":/roomView/boilerRoom_view.jpg",false, false, true, "BoilerKey");
-    b-> addKeys(new keys("KEY", "FrontKey",":/items/Key_image.png"));
+    b-> addKeys(new keys("KEY", "BathKey",":/items/Key_image.png"));
     listOfRooms.push_back(b);
     a->setExits(listOfRooms);
     listOfRooms.clear();
@@ -34,6 +46,7 @@ void ZorkUL::initializeGame()  {
 
     listOfRooms.clear();
 
+    message = "<html><b>S</b>ometimes it's a good <b>I</b>dea to give up.</html>";
     // First Floor
     a = new Room("Hallway", ":/maps/ground_hallway.png",":/roomView/hallway1_view.jpg", true, true);
     b = new Room("Kitchen", ":/maps/ground_kitchen.png",":/roomView/Kitchen_view.jpg",false,false,false,"null");
@@ -41,9 +54,11 @@ void ZorkUL::initializeGame()  {
     d = new Room("Dining Room", ":/maps/ground_dining.png",":/roomView/diningRoom_view.jpg",false,false,true,"DiningKey");
     e = new Room("Living Room", ":/maps/ground_living.png",":/roomView/livingRoom_view.jpg",false,false,false,"null");
     FrontDoor = new Room("Front Door","","", false, false, true, "FrontKey");
-    b->addNote(new notes("NOTE", "Kitchen", "Just a simple kitchen note :D",":/items/Page_image.png"));
+    b->addNote(new notes("NOTE", "Kitchen", message,":/items/Page_image.png"));
     c->addKeys(new keys("KEY", "DiningKey",":/items/Key_image.png"));
     d->addKeys(new keys("KEY", "ParentsKey",":/items/Key_image.png" ));
+    message = "<html><b>L</b>ove of mon<b>E</b>y is a root of all sorts of injurious things.</html>";
+    d->addNote(new notes("NOTE", "Dining Room", message, ":/items/Page_image.png"));
     listOfRooms.push_back(b);
     listOfRooms.push_back(c);
     listOfRooms.push_back(d);
@@ -91,10 +106,10 @@ void ZorkUL::initializeGame()  {
     c = new Room("Bathroom", ":/maps/top_bathroom.png", ":/roomView/Bathroom2_view.jpg",false,false,true,"BathKey");
     d = new Room("Daughter's Room", ":/maps/top_d_room.png",":/roomView/Bedroom3_view.jpg");
     e = new Room("Parent's Room", ":/maps/top_p_room.png",":/roomView/Bedroom2_view.jpg",false,false, true, "ParentsKey");
-    e->addNote(new notes("NOTE", "Parent's Room", "Parent's Room note (Save me from my misery)",
-                         ":/items/Page_image.png"));
-    b->addKeys(new keys("KEY", "BathKey", ":/items/Key_image.png"));
+    c->addKeys(new keys("KEY", "FrontKey", ":/items/Key_image.png"));
     e->addKeys(new keys("KEY", "BoilerKey", ":/items/Key_image.png"));
+    message = "Throw me out of the window you'll leave a grieving wife but bring me in through the door you'll see someone giving life. What am I?";
+    e->addNote(new notes("NOTE", "Boiler Room", message, ":/items/Page_image.png"));
     listOfRooms.push_back(b);
     listOfRooms.push_back(c);
     listOfRooms.push_back(d);
@@ -203,4 +218,15 @@ QPixmap ZorkUL::go(QString selectedExit) {
         }
     }
     return currentRoom->getPixmap();
+}
+
+bool ZorkUL::checkAnswer(QString input) {
+    bool correct = false;
+    QString capital = input.toUpper();
+
+    if(capital.compare(this->answer) == 0)
+        correct = true;
+
+    return correct;
+
 }

@@ -29,6 +29,7 @@ private:
 
 public:
     Room(QString = "", QString = "", QString = "", bool = false, bool = false, bool = false, QString = "");
+    ~Room();
     void setExits(vector<Room*>&);
     void addNote(notes*);
     void addKeys(keys*);

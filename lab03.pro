@@ -24,7 +24,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        main.cpp \
         mainwindow.cpp \
     Character.cpp \
     Command.cpp \
@@ -44,7 +43,10 @@ SOURCES += \
     floor.cpp \
     Parser.cpp \
     notes.cpp \
-    keys.cpp
+    keys.cpp \
+    main.cpp \
+    lastriddle.cpp \
+    gameend.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -66,10 +68,14 @@ HEADERS += \
     #Headers/Parser.h \
     #Headers/Room.h \
     #Headers/ZorkUL.h
+    lastriddle.h \
+    gameend.h
 
 FORMS += \
         mainwindow.ui \
     #Forms/mainwindow.ui
+    lastriddle.ui \
+    gameend.ui
 
 RESOURCES += \
     project_images/myresmaps.qrc\

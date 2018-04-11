@@ -13,6 +13,7 @@ private:
 
 public:
     Item (QString description);
+    ~Item();
     QString getShortDescription();
     QString getLongDescription();
 };

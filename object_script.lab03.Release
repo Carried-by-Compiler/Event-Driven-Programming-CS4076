@@ -1,5 +1,4 @@
 INPUT(
-./release\main.o
 ./release\mainwindow.o
 ./release\Character.o
 ./release\Command.o
@@ -11,8 +10,13 @@ INPUT(
 ./release\Parser.o
 ./release\notes.o
 ./release\keys.o
+./release\main.o
+./release\lastriddle.o
+./release\gameend.o
 ./release\qrc_myresmaps.o
 ./release\qrc_roomviews.o
 ./release\qrc_itemRes.o
 ./release\moc_mainwindow.o
+./release\moc_lastriddle.o
+./release\moc_gameend.o
 );

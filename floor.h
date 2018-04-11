@@ -18,6 +18,7 @@ private:
 
 public:
     Floor();
+    ~Floor();
     void setRooms(vector<Room*>&);
     void setDetails(int, QString);
     int  getFloorNum();

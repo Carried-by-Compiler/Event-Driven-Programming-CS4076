@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "lastriddle.h"
+#include "gameend.h"
 #include "ZorkUL.h"
 #include "item.h"
 namespace Ui {
@@ -55,9 +57,12 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    LastRiddle *lastRiddle;
+    GameEnd *gameEnd;
     ZorkUL *zork;
     int inventoryItemCounter;
     vector<Item*> inventoryItems;
+    QString answer;
 
     void check_exit_rooms();
     void displayCurrentRoomInfo();
@@ -65,6 +70,7 @@ private:
     void clearExitList();
     void floorMoveAllowed();
     void on_unlocked_Door(QString, int);
+    void displayLastRiddle();
 
     void inventoryDisplay();
     void displayItemContents();

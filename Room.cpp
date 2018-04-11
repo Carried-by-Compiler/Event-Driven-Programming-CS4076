@@ -2,6 +2,7 @@
 #include "item.h"
 #include "keys.h"
 #include "Command.h"
+#include <iostream>
 
 Room::Room(QString description, QString path, QString path2, bool up, bool down, bool locked, QString keyID) : roomInMapImage(path){
 	this->description = description;
@@ -11,6 +12,11 @@ Room::Room(QString description, QString path, QString path2, bool up, bool down,
     this->locked = locked;
     this->keyID = keyID;
 }
+
+Room::~Room() {
+    std::cout << "Deleting room " << this->description.toStdString() << endl;
+}
+
 void Room::setExits(vector<Room*> &rooms) {
     this->exits = rooms;
 }

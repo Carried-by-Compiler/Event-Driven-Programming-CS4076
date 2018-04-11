@@ -1,8 +1,17 @@
 #include "floor.h"
+#include <iostream>
 
 Floor::Floor() {
     initMap();
 }
+Floor::~Floor() {
+    std::cout << "Deleting floor " << this->floorNumber << endl;
+    for(int i = 0; i < this->rooms.size(); i++) {
+        delete this->rooms.at(i);
+    }
+
+}
+
 
 void Floor::setRooms(vector<Room *> &r) {
     this->rooms = r;

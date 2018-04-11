@@ -10,6 +10,12 @@
     <height>538</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>798</width>
+    <height>538</height>
+   </size>
+  </property>
   <property name="maximumSize">
    <size>
     <width>798</width>
@@ -317,22 +323,6 @@
      <string>Exits:</string>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="roomInfoOutput">
-    <property name="geometry">
-     <rect>
-      <x>540</x>
-      <y>320</y>
-      <width>241</width>
-      <height>141</height>
-     </rect>
-    </property>
-    <property name="readOnly">
-     <bool>true</bool>
-    </property>
-    <property name="plainText">
-     <string/>
-    </property>
-   </widget>
    <widget class="QPushButton" name="UseItem">
     <property name="geometry">
      <rect>
@@ -344,6 +334,25 @@
     </property>
     <property name="text">
      <string>Use</string>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="roomInfoOutput">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>320</y>
+      <width>241</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Consolas</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>
