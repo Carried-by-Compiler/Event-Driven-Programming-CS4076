@@ -25,9 +25,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         mainwindow.cpp \
-    Character.cpp \
-    Command.cpp \
-    CommandWords.cpp \
     item.cpp \
     Room.cpp \
     ZorkUL.cpp \
@@ -41,7 +38,6 @@ SOURCES += \
     #Sources/Room.cpp \
     #Sources/ZorkUL.cpp
     floor.cpp \
-    Parser.cpp \
     notes.cpp \
     keys.cpp \
     main.cpp \
@@ -50,14 +46,10 @@ SOURCES += \
 
 HEADERS += \
         mainwindow.h \
-    Character.h \
-    Command.h \
-    CommandWords.h \
     item.h \
     Room.h \
     ZorkUL.h \
     floor.h \
-    Parser.h \
     notes.h \
     keys.h \
     #Headers/Character.h \

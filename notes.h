@@ -11,8 +11,9 @@ private:
      QString imagePath;
 
 public:
-    notes(QString = "", QString = "", QString = "",QString = "");
+    notes(QString = "", QString = "",QString = "");
     ~notes();
+    void    setNoteID(QString);
     QString getNoteID();
     QString getContents();
     QString getimagePath();

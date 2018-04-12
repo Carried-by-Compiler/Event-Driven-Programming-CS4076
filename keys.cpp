@@ -8,7 +8,7 @@ keys::keys(QString label, QString keyID, QString imagePath) : Item(label)
 }
 
 keys::~keys() {
-    std::cout << "Deleting keys " << this->keyID.toStdString();
+    std::cout << "Deleting keys " << this->keyID.toStdString() << endl;
 }
 
 QString keys::getKeyID(){

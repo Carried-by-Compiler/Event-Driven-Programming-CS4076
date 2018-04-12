@@ -1,13 +1,9 @@
 INPUT(
 ./debug\mainwindow.o
-./debug\Character.o
-./debug\Command.o
-./debug\CommandWords.o
 ./debug\item.o
 ./debug\Room.o
 ./debug\ZorkUL.o
 ./debug\floor.o
-./debug\Parser.o
 ./debug\notes.o
 ./debug\keys.o
 ./debug\main.o

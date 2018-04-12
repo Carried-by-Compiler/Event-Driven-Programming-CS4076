@@ -15,20 +15,22 @@ MainWindow::MainWindow(QWidget *parent) :
     QPixmap p(":/maps/ground_hallway.png");
     ui->mapImage->setPixmap(p);
 
-    notes *n = new notes("NOTE", "Hallway", message, ":/items/Page_image.png");
-    addItemToInventoryGUI(n);
-    ui->roomInfoOutput->document()->setHtml(n->getContents());
-
     displayCurrentRoomInfo();
     displayExitList();
     inventoryDisplay();
     floorMoveAllowed();
-    ui->roomInfoOutput->document()->setHtml(n->getContents());
+
+    ui->tabWidget->setCurrentIndex(1);
+    ui->roomInfoOutput->document()->setHtml(message);
 }
 
 MainWindow::~MainWindow()
 {
     delete zork;
+    if(lastRiddle != NULL)
+        delete lastRiddle;
+    if(gameEnd != NULL)
+        delete gameEnd;
     delete ui;
 }
 
@@ -50,14 +52,18 @@ void MainWindow::floorMoveAllowed() {
 }
 
 void MainWindow::displayCurrentRoomInfo() {
+    QString message;
     QString currentRoomInfo;
     QString roomViewPath;
     Room *room;
     Floor *floor;
     floor = zork->getCurrentFloor();
     room = zork->getCurrentRoom();
-    currentRoomInfo = room->longDescription();
-    ui->roomInfoOutput->document()->setPlainText(floor->getDesc() + currentRoomInfo);
+
+    message = "<html><h4>Current Floor</h4>" + floor->getDesc();
+    message += "<br><h4>Current Room</h4> " + room->shortDescription() + "</html>";
+
+    ui->roomInfoOutput->document()->setHtml(message);
     roomViewPath = room->getViewPixmap();
     ui->roomNameLabel->setPixmap(roomViewPath);
 
@@ -315,15 +321,6 @@ void MainWindow::displayLastRiddle() {
 
 }
 
-void MainWindow::on_UseItem_clicked()
-{
-    gameEnd = new GameEnd();
-    gameEnd->setModal(true);
-    gameEnd->exec();
-
-    this->close();
-}
-
 void MainWindow::on_item1_clicked()
 {
     if(inventoryItems.size()>0)
@@ -565,7 +562,7 @@ void MainWindow::on_item6_clicked()
      Item *check  = inventoryItems.at(5);
      if(check->getShortDescription().compare("NOTE") == 0) {
         notes *note =  (notes *) inventoryItems.at(5);//zork->findNote(ui->item2->text());
-        ui->roomInfoOutput->setPlainText(note->getContents());
+        ui->roomInfoOutput->document()->setHtml(note->getContents());
 
       }
      else if(check->getShortDescription().compare("KEY") == 0) {
@@ -612,7 +609,7 @@ void MainWindow::on_item7_clicked()
      Item *check  = inventoryItems.at(6);
      if(check->getShortDescription().compare("NOTE") == 0) {
         notes *note =  (notes *) inventoryItems.at(6);//zork->findNote(ui->item2->text());
-        ui->roomInfoOutput->setPlainText(note->getContents());
+        ui->roomInfoOutput->document()->setHtml(note->getContents());
 
       }
      else if(check->getShortDescription().compare("KEY") == 0) {
@@ -659,7 +656,7 @@ void MainWindow::on_item8_clicked()
      Item *check  = inventoryItems.at(7);
      if(check->getShortDescription().compare("NOTE") == 0) {
         notes *note =  (notes *) inventoryItems.at(7);//zork->findNote(ui->item2->text());
-        ui->roomInfoOutput->setPlainText(note->getContents());
+        ui->roomInfoOutput->document()->setHtml(note->getContents());
 
       }
      else if(check->getShortDescription().compare("KEY") == 0) {
@@ -706,7 +703,7 @@ void MainWindow::on_item9_clicked()
      Item *check  = inventoryItems.at(8);
      if(check->getShortDescription().compare("NOTE") == 0) {
         notes *note = (notes *) inventoryItems.at(8); //zork->findNote(ui->item2->text());
-        ui->roomInfoOutput->setPlainText(note->getContents());
+        ui->roomInfoOutput->document()->setHtml(note->getContents());
 
       }
      else if(check->getShortDescription().compare("KEY") == 0) {

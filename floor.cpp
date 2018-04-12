@@ -1,9 +1,8 @@
 #include "floor.h"
 #include <iostream>
 
-Floor::Floor() {
-    initMap();
-}
+Floor::Floor() {}
+
 Floor::~Floor() {
     std::cout << "Deleting floor " << this->floorNumber << endl;
     for(int i = 0; i < this->rooms.size(); i++) {
@@ -28,10 +27,6 @@ int Floor::getFloorNum() { return this->floorNumber; }
 
 QString Floor::getDesc() {
 
-    return "Current Floor: " + QString::number(floorNumber) + "\nFloor Name: " + description + "\n";
+    return this->description;
 
-}
-
-void Floor::initMap() {
-    // Initialize map for display
 }

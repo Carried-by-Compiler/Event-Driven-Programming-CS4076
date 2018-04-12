@@ -1,7 +1,6 @@
 #include "Room.h"
 #include "item.h"
 #include "keys.h"
-#include "Command.h"
 #include <iostream>
 
 Room::Room(QString description, QString path, QString path2, bool up, bool down, bool locked, QString keyID) : roomInMapImage(path){
@@ -15,6 +14,13 @@ Room::Room(QString description, QString path, QString path2, bool up, bool down,
 
 Room::~Room() {
     std::cout << "Deleting room " << this->description.toStdString() << endl;
+
+    for(int i = 0; i < itemsInRoom.size(); i++) {
+        if(itemsInRoom.at(i)->getShortDescription().compare("NOTE") == 0)
+            delete (notes*)itemsInRoom.at(i);
+        else
+            delete (keys*)itemsInRoom.at(i);
+    }
 }
 
 void Room::setExits(vector<Room*> &rooms) {
@@ -72,3 +78,14 @@ QString Room::getViewPixmap(){return this->viewPath;}
 QPixmap Room::getPixmap()   { return this->roomInMapImage; }
 bool Room::canGoUp()        { return this->upstairs;    }
 bool Room::canGoDown()      { return this->downstairs;  }
+
+bool operator !=(keys &k, Room &r) {
+    bool result;
+
+    if(k.getKeyID().compare(r.keyID) != 0)
+        result = true;
+    else
+        result = false;
+
+    return result;
+}

@@ -35,8 +35,6 @@ private slots:
 
     void on_SearchButton_clicked();
 
-    void on_UseItem_clicked();
-
     void on_item1_clicked();
 
     void on_item2_clicked();
@@ -57,8 +55,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    LastRiddle *lastRiddle;
-    GameEnd *gameEnd;
+    LastRiddle *lastRiddle = NULL;
+    GameEnd *gameEnd = NULL;
     ZorkUL *zork;
     int inventoryItemCounter;
     vector<Item*> inventoryItems;

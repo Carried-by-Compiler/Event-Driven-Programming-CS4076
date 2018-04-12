@@ -6,7 +6,7 @@ Item::Item (QString inDescription) {
 }
 
 Item::~Item() {
-    cout << "Deleting item " << this->description.toStdString();
+    cout << "Deleting item " << this->description.toStdString() << endl;
 
 }
 

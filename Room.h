@@ -15,6 +15,8 @@ using std::vector;
 
 class Room {
 
+    friend bool operator !=(keys &, Room &);
+
 private:
     QString description;
     QString viewPath;
